@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CardDetailPanel } from "@/features/cards/components/CardDetailPanel";
 import { CardExportDrawer } from "@/features/cards/components/CardExportDrawer";
 import { CardListTable } from "@/features/cards/components/CardListTable";
@@ -40,25 +40,29 @@ export function CardListPage() {
   const [isExportDrawerOpen, setIsExportDrawerOpen] = useState(false);
   const [isDetailDrawerOpen, setIsDetailDrawerOpen] = useState(false);
 
-  const filteredRecords = cardManageRecords.filter((row) => {
-    const matchesActiveTab = activeStatus === "all" ? true : row.inventoryStatus === activeStatus;
-    const matchesCardType = cardTypeValue === "all" ? true : row.cardTypeLabel === cardTypeValue;
-    const matchesVehicleType = vehicleTypeValue === "all" ? true : row.vehicleType === vehicleTypeValue;
-    const matchesInventoryStatus = inventoryStatusValue === "all" ? true : row.inventoryStatus === (inventoryStatusValue as CardInventoryStatus);
-    const matchesSubscriptionStatus =
-      subscriptionStatusValue === "all" ? true : row.subscriptionState === (subscriptionStatusValue as CardSubscriptionState);
-    const matchesLostStatus = lostStatusValue === "all" ? true : row.lostCardState === (lostStatusValue as CardLostState);
+  const filteredRecords = useMemo(
+    () =>
+      cardManageRecords.filter((row) => {
+        const matchesActiveTab = activeStatus === "all" ? true : row.inventoryStatus === activeStatus;
+        const matchesCardType = cardTypeValue === "all" ? true : row.cardTypeLabel === cardTypeValue;
+        const matchesVehicleType = vehicleTypeValue === "all" ? true : row.vehicleType === vehicleTypeValue;
+        const matchesInventoryStatus = inventoryStatusValue === "all" ? true : row.inventoryStatus === (inventoryStatusValue as CardInventoryStatus);
+        const matchesSubscriptionStatus =
+          subscriptionStatusValue === "all" ? true : row.subscriptionState === (subscriptionStatusValue as CardSubscriptionState);
+        const matchesLostStatus = lostStatusValue === "all" ? true : row.lostCardState === (lostStatusValue as CardLostState);
 
-    return (
-      matchesActiveTab &&
-      matchesCardType &&
-      matchesVehicleType &&
-      matchesInventoryStatus &&
-      matchesSubscriptionStatus &&
-      matchesLostStatus &&
-      matchesSearch(row, searchValue)
-    );
-  });
+        return (
+          matchesActiveTab &&
+          matchesCardType &&
+          matchesVehicleType &&
+          matchesInventoryStatus &&
+          matchesSubscriptionStatus &&
+          matchesLostStatus &&
+          matchesSearch(row, searchValue)
+        );
+      }),
+    [activeStatus, cardTypeValue, inventoryStatusValue, lostStatusValue, searchValue, subscriptionStatusValue, vehicleTypeValue],
+  );
 
   const totalPages = Math.max(1, Math.ceil(filteredRecords.length / pageSize));
   const safeCurrentPage = Math.min(currentPage, totalPages);
@@ -74,7 +78,10 @@ export function CardListPage() {
   }, [currentPage, safeCurrentPage]);
 
   useEffect(() => {
-    setCheckedIds((prev) => prev.filter((id) => filteredRecords.some((row) => row.id === id)));
+    setCheckedIds((prev) => {
+      const next = prev.filter((id) => filteredRecords.some((row) => row.id === id));
+      return next.length === prev.length ? prev : next;
+    });
   }, [filteredRecords]);
 
   const toggleRowCheck = (id: string) => {
@@ -95,10 +102,10 @@ export function CardListPage() {
           <div className="vm-card-manage-page">
             <CardManageHeader />
             <CardSummaryGrid items={cardSummaryMetrics} />
-            <div className="vm-card-status-row">
+            <div className="tw-flex tw-items-center tw-gap-[0.7rem]">
               <CardStatusTabs activeValue={activeStatus} counts={cardStatusCounts} onChange={setActiveStatus} tabs={cardStatusTabs} />
               <button
-                className="btn vm-card-manage-header__export vm-card-status-row__export"
+                className="btn vm-card-manage-header__export tw-ml-auto !tw-min-h-11 !tw-flex-shrink-0 !tw-rounded-vm-lg !tw-px-4"
                 type="button"
                 onClick={() => setIsExportDrawerOpen(true)}
               >

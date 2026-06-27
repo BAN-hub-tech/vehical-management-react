@@ -201,7 +201,7 @@ export function AdminHeader() {
                   </div>
                 </div>
 
-                <Link to="/admin/account/form" className="vm-header-item" onClick={() => setProfileOpen(false)}>
+                <Link to="/admin/profile" className="vm-header-item" onClick={() => setProfileOpen(false)}>
                   <span className="vm-header-item__icon">
                     <i className="fas fa-user-circle" />
                   </span>
@@ -210,6 +210,23 @@ export function AdminHeader() {
                     <small>Cập nhật hồ sơ quản trị</small>
                   </span>
                 </Link>
+
+                <button
+                  type="button"
+                  className="vm-header-item vm-header-item--button"
+                  onClick={() => {
+                    setProfileOpen(false);
+                    navigate("/admin/profile?action=change-password");
+                  }}
+                >
+                  <span className="vm-header-item__icon">
+                    <i className="fas fa-key" />
+                  </span>
+                  <span className="vm-header-item__content">
+                    <strong>Đổi mật khẩu</strong>
+                    <small>Cập nhật mật khẩu đăng nhập nội bộ</small>
+                  </span>
+                </button>
 
                 <Link to="/contact" className="vm-header-item" onClick={() => setProfileOpen(false)}>
                   <span className="vm-header-item__icon">

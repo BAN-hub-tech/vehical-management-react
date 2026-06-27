@@ -16,7 +16,7 @@ import {
 import { ContactPage, CustomerHistoryPage, PricingPage, ProfilePage } from "@/features/customer-portal";
 import { CustomerFormPage, CustomerListPage } from "@/features/customers";
 import { DashboardPage } from "@/features/dashboard";
-import { AccountFormPage, AccountListPage, RoleFormPage, RoleListPage } from "@/features/iam";
+import { AccountFormPage, AccountListPage, InternalProfilePage, RoleFormPage, RoleListPage } from "@/features/iam";
 import { SwipeEntryPage, SwipeListPage } from "@/features/parking";
 
 export interface RouteDefinition {
@@ -45,6 +45,7 @@ export const routes: RouteDefinition[] = [
   { path: "/admin/parkingFeeOfCustomer/form", title: "Thong tin phi dang ky", layout: "admin", element: <RegistrationFeeFormPage /> },
   { path: "/admin/account", title: "Quan ly tai khoan", layout: "admin", element: <AccountListPage /> },
   { path: "/admin/account/form", title: "Thong tin tai khoan", layout: "admin", element: <AccountFormPage /> },
+  { path: "/admin/profile", title: "Thong tin tai khoan ca nhan", layout: "admin", element: <InternalProfilePage /> },
   { path: "/admin/customer", title: "Quan ly khach hang", layout: "admin", element: <CustomerListPage /> },
   { path: "/admin/customer/form", title: "Thong tin khach hang", layout: "admin", element: <CustomerFormPage /> },
   { path: "/admin/role", title: "Phan quyen vai tro", layout: "admin", element: <RoleListPage /> },

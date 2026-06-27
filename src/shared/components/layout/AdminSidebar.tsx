@@ -16,6 +16,7 @@ function SidebarIcon({ icon }: { icon: AdminSidebarIcon }) {
     pricing: "fas fa-file-invoice-dollar",
     members: "fas fa-users",
     role: "fas fa-user-shield",
+    settings: "fas fa-cog",
   } satisfies Record<AdminSidebarIcon, string>;
 
   return <i className={`vm-sidebar-icon ${iconClassName[icon]}`} aria-hidden="true" />;

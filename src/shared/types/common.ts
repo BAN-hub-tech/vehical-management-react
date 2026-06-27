@@ -28,7 +28,7 @@ export interface CurrentUser {
   avatarUrl: string;
 }
 
-export type AdminSidebarIcon = "dashboard" | "swipe" | "card" | "catalog" | "pricing" | "members" | "role";
+export type AdminSidebarIcon = "dashboard" | "swipe" | "card" | "catalog" | "pricing" | "members" | "role" | "settings";
 
 export interface AdminSidebarLeaf {
   label: string;

@@ -9,5 +9,5 @@ interface CardStatusTabsProps {
 }
 
 export function CardStatusTabs({ activeValue, counts, tabs, onChange }: CardStatusTabsProps) {
-  return <StatusTabs activeValue={activeValue} ariaLabel="Card status tabs" counts={counts} onChange={onChange} tabs={tabs} />;
+  return <StatusTabs activeValue={activeValue} ariaLabel="Card status tabs" className="tw-flex-1 tw-min-w-0" counts={counts} onChange={onChange} tabs={tabs} />;
 }

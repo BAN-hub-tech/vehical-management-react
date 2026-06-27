@@ -1,4 +1,4 @@
-﻿export function CardManageHeader() {
+export function CardManageHeader() {
   return (
     <div className="vm-card-manage-header">
       <div className="vm-card-manage-header__main">

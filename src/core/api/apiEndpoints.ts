@@ -25,6 +25,11 @@ export const apiEndpoints = {
   },
   iam: {
     accounts: "/accounts",
+    accountProfile: {
+      onboarding: "/iam/accounts/onboarding",
+      profile: "/iam/accounts/profile",
+      avatar: "/iam/accounts/profile/avatar",
+    },
     roles: "/roles",
   },
 } as const;

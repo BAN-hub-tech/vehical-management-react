@@ -207,7 +207,7 @@ export function CatalogStatusTabs({ activeValue, counts, onChange }: CatalogStat
     { value: "inactive" as const, label: "Ngừng dùng" }
   ];
 
-  return <StatusTabs activeValue={activeValue} ariaLabel="Catalog status tabs" className="vm-catalog-tabs-shell" counts={counts} onChange={onChange} tabs={tabs} />;
+  return <StatusTabs activeValue={activeValue} ariaLabel="Catalog status tabs" className="tw-w-fit tw-max-w-full" counts={counts} onChange={onChange} tabs={tabs} />;
 }
 
 export function CatalogToolbar({ children, onReset, onSearchChange, searchPlaceholder, searchValue, variant = "ticket" }: CatalogToolbarProps) {
@@ -256,7 +256,7 @@ export function CatalogPagination({
   return (
     <PaginationFooter
       ariaLabel="Catalog pagination"
-      className="vm-catalog-card-pagination"
+      className="tw-rounded-b-vm-lg !tw-border-[rgba(226,232,240,0.92)] tw-bg-white"
       currentPage={currentPage}
       endIndex={endIndex}
       onPageChange={onPageChange}

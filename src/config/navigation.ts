@@ -56,11 +56,12 @@ export const adminNavigation: AdminSidebarEntry[] = [
   },
   { kind: "divider" },
   {
-    kind: "link",
-    label: "Quản lý vai trò",
-    to: "/admin/role",
-    matches: ["/admin/role"],
-    icon: "role",
+    kind: "group",
+    label: "Cài đặt hệ thống",
+    icon: "settings",
+    items: [
+      { label: "Vai trò & Quyền", to: "/admin/role", matches: ["/admin/role"] },
+    ],
   },
 ];
 
