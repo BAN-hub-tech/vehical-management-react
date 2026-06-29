@@ -13,10 +13,11 @@ type SelectMenuProps = {
   clearValue?: string;
   onChange: (value: string) => void;
   options: SelectMenuOption[];
+  placement?: "bottom" | "top";
   value: string;
 };
 
-export function SelectMenu({ ariaLabel, className, clearValue = "all", onChange, options, value }: SelectMenuProps) {
+export function SelectMenu({ ariaLabel, className, clearValue = "all", onChange, options, placement = "bottom", value }: SelectMenuProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement | null>(null);
   const selected = options.find((option) => option.value === value) ?? options[0];
@@ -52,9 +53,9 @@ export function SelectMenu({ ariaLabel, className, clearValue = "all", onChange,
         aria-expanded={open}
         aria-label={ariaLabel}
         className={cn(
-          "tw-group tw-flex tw-h-[42px] tw-w-full tw-items-center tw-justify-between tw-gap-2 tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-py-0 tw-pl-[0.95rem] tw-pr-[0.8rem] tw-text-left tw-text-[0.92rem] tw-font-semibold tw-text-[#111827] tw-shadow-[0_4px_10px_rgba(15,23,42,0.025)] tw-transition focus-visible:tw-outline-none",
-          "hover:tw-border-[rgba(203,213,225,0.98)] hover:tw-shadow-[0_0_0_3px_rgba(148,163,184,0.08)] focus-visible:tw-border-[rgba(37,99,235,0.36)] focus-visible:tw-shadow-[0_0_0_3px_rgba(37,99,235,0.08)]",
-          open ? "tw-border-[rgba(37,99,235,0.36)] tw-shadow-[0_0_0_3px_rgba(37,99,235,0.08)]" : "",
+          "tw-group tw-flex tw-h-[42px] tw-w-full tw-items-center tw-justify-between tw-gap-2 tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-py-0 tw-pl-[0.95rem] tw-pr-[0.8rem] tw-text-left tw-text-[0.92rem] tw-font-semibold tw-text-[#111827] tw-shadow-[0_4px_10px_rgba(15,23,42,0.025)] tw-transition focus-visible:tw-outline-none",
+          "hover:tw-border-vm-slate-200 hover:tw-shadow-[0_0_0_3px_rgba(148,163,184,0.08)] focus-visible:tw-border-brand-200 focus-visible:tw-shadow-[0_0_0_3px_rgba(37,99,235,0.08)]",
+          open ? "tw-border-brand-200 tw-shadow-[0_0_0_3px_rgba(37,99,235,0.08)]" : "",
         )}
         type="button"
         onClick={() => setOpen((current) => !current)}
@@ -87,7 +88,12 @@ export function SelectMenu({ ariaLabel, className, clearValue = "all", onChange,
       </button>
 
       {open ? (
-        <div className="tw-absolute tw-left-0 tw-top-[calc(100%+6px)] tw-z-[80] tw-max-h-60 tw-w-full tw-overflow-y-auto tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-py-[0.35rem] tw-shadow-[0_10px_26px_rgba(15,23,42,0.14)] tw-[scrollbar-width:none] tw-[-ms-overflow-style:none] [&::-webkit-scrollbar]:tw-hidden">
+        <div
+          className={cn(
+            "tw-absolute tw-left-0 tw-z-[80] tw-max-h-60 tw-w-full tw-overflow-y-auto tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-py-[0.35rem] tw-shadow-[0_10px_26px_rgba(15,23,42,0.14)] tw-[scrollbar-width:none] tw-[-ms-overflow-style:none] [&::-webkit-scrollbar]:tw-hidden",
+            placement === "top" ? "tw-bottom-[calc(100%+6px)]" : "tw-top-[calc(100%+6px)]",
+          )}
+        >
           {options.map((option) => {
             const selectedOption = option.value === value;
 

@@ -33,13 +33,13 @@ export function StatusTabs<TValue extends string>({
   const afterTabs = tabs.slice(safeActiveIndex + 1);
 
   const groupClassName =
-    "tw-relative tw-flex tw-gap-0 tw-overflow-visible tw-rounded-vm-lg tw-border tw-border-solid tw-border-[rgba(226,232,240,0.9)] tw-bg-white tw-px-[0.32rem] tw-pb-[0.24rem] tw-pt-[0.28rem] tw-shadow-[0_10px_24px_rgba(15,23,42,0.03)] empty:tw-hidden";
+    "tw-relative tw-flex tw-gap-0 tw-overflow-visible tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-px-[0.32rem] tw-pb-[0.24rem] tw-pt-[0.28rem] tw-shadow-[0_10px_24px_rgba(15,23,42,0.03)] empty:tw-hidden";
   const tabClassName =
     "tw-relative tw-inline-flex tw-min-h-[38px] tw-items-center tw-gap-[0.55rem] tw-border tw-border-solid tw-border-transparent tw-bg-white tw-px-[1.1rem] tw-py-[0.55rem] tw-text-[0.94rem] tw-font-bold tw-text-vm-slate-700 tw-transition hover:tw-text-vm-primary";
   const countClassName =
     "tw-inline-flex tw-h-5 tw-min-w-5 tw-items-center tw-justify-center tw-rounded-full tw-bg-[rgba(148,163,184,0.16)] tw-px-[0.35rem] tw-text-[0.78rem] tw-font-extrabold tw-leading-none tw-text-inherit";
   const activeClassName =
-    "tw-z-[2] tw-rounded-vm-md !tw-border-[rgba(37,99,235,0.34)] tw-bg-white !tw-text-vm-primary tw-shadow-[inset_0_-3px_0_#2563EB,0_0_0_1px_rgba(37,99,235,0.08)]";
+    "tw-z-[2] tw-rounded-vm-md !tw-border-brand-200 tw-bg-white !tw-text-vm-primary tw-shadow-[inset_0_-3px_0_#2563EB,0_0_0_1px_rgba(37,99,235,0.08)]";
 
   return (
     <div className={cn("tw-flex tw-items-stretch tw-gap-[0.35rem]", className)} role="tablist" aria-label={ariaLabel}>

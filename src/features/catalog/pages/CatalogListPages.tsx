@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
 import {
   CatalogFilterSelect,
   CatalogHeader,
@@ -23,14 +22,6 @@ import {
   type TicketCatalogRecord,
   type VehicleCatalogRecord
 } from "@/features/catalog/components/catalogManageData";
-import { FilterControls } from "../../../shared/components/form/FilterControls";
-import { ActionButtons } from "../../../shared/components/table/ActionButtons";
-import { AdminTablePage } from "../../../shared/components/table/AdminTablePage";
-import { customerParkingFees, vehicleTypes, visitorParkingFees } from "../../../shared/data/mockData";
-import type { TableColumn } from "../../../shared/types/common";
-
-type VisitorFeeRow = (typeof visitorParkingFees)[number];
-type CustomerFeeRow = (typeof customerParkingFees)[number];
 
 function matchesText(values: Array<string | number | undefined>, searchValue: string) {
   if (!searchValue.trim()) return true;
@@ -79,10 +70,10 @@ const priceRuleOptions = [
 
 function CatalogPageShell({ children }: { children: ReactNode }) {
   return (
-    <div className="content-header vm-card-content-header">
-      <section className="content vm-admin-content">
-        <div className="container-fluid">
-          <div className="vm-catalog-page">{children}</div>
+    <div className="content-header tw-px-0 tw-pb-4 tw-pt-3">
+      <section className="content tw-pb-8">
+        <div className="container-fluid tw-max-w-[1480px]">
+          <div className="tw-grid tw-gap-4 tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-p-4 tw-shadow-[0_16px_34px_rgba(15,23,42,0.04)]">{children}</div>
         </div>
       </section>
     </div>
@@ -134,8 +125,8 @@ export function TicketListPage() {
         setCurrentPage(1);
       }} />
 
-      <div className="vm-catalog-board vm-catalog-board--ticket">
-        <main className="vm-catalog-main">
+      <div className="tw-grid tw-grid-cols-[minmax(0,1fr)_minmax(290px,0.34fr)] tw-items-start tw-gap-[0.9rem] max-[1360px]:tw-grid-cols-1">
+        <main className="tw-min-w-0 tw-overflow-hidden tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-shadow-[0_14px_36px_rgba(15,23,42,0.05)]">
           <CatalogToolbar
             variant="ticket"
             searchPlaceholder="Tìm mã, tên loại vé..."
@@ -222,8 +213,8 @@ export function VehicleListPage() {
       <CatalogHeader createLabel="Thêm loại xe" title="Loại phương tiện" />
       <CatalogMetricGrid items={vehicleMetrics} />
 
-      <div className="vm-catalog-board vm-catalog-board--vehicle">
-        <main className="vm-catalog-main">
+      <div className="tw-grid tw-grid-cols-[minmax(0,1fr)_minmax(300px,0.32fr)] tw-items-start tw-gap-[0.9rem] max-[1360px]:tw-grid-cols-1">
+        <main className="tw-min-w-0 tw-overflow-hidden tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-shadow-[0_14px_36px_rgba(15,23,42,0.05)]">
           <CatalogToolbar
             variant="vehicle"
             searchPlaceholder="Tìm mã, tên loại xe..."
@@ -264,65 +255,5 @@ export function VehicleListPage() {
         <VehicleDetailPanel row={selectedRecord} />
       </div>
     </CatalogPageShell>
-  );
-}
-
-const badge = (status: string) => <span className="badge bg-cyan">{status}</span>;
-
-const addButton = (href: string) => (
-  <div className="form-group col-2 ml-auto mr-3 mt-3">
-    <Link to={href} className="btn btn-info btn-block">
-      <i className="fas fa-plus-circle" /> Thêm mới
-    </Link>
-  </div>
-);
-
-export function VisitorParkingFeePage() {
-  const columns: TableColumn<VisitorFeeRow>[] = [
-    { key: "stt", label: "STT", render: (_row, index) => index + 1 },
-    { key: "id", label: "ID bảng giá" },
-    { key: "vehicleType", label: "Loại xe" },
-    { key: "timeRange", label: "Khung giờ" },
-    { key: "price", label: "Phí dịch vụ" },
-    { key: "lostCardFee", label: "Phí mất thẻ" },
-    { key: "status", label: "Trạng thái", render: (row) => badge(row.status) },
-    { key: "actions", label: "Chức năng", width: "100px", render: () => <ActionButtons editHref="/admin/visitorParkingFee/form" /> }
-  ];
-
-  return (
-    <AdminTablePage
-      title="Quản lý phí vãng lai"
-      breadcrumbs={[{ label: "Bảng giá", href: "/admin/visitorParkingFee" }, { label: "Phí vãng lai" }]}
-      tableTitle="Bảng quản lý phí vãng lai"
-      columns={columns}
-      rows={visitorParkingFees}
-      filters={<FilterControls selects={[{ name: "vehicleTypeId", placeholder: "Tất cả loại xe", options: vehicleTypes }]} />}
-      actions={addButton("/admin/visitorParkingFee/form")}
-    />
-  );
-}
-
-export function RegistrationFeePage() {
-  const columns: TableColumn<CustomerFeeRow>[] = [
-    { key: "stt", label: "STT", render: (_row, index) => index + 1 },
-    { key: "id", label: "ID phí đăng ký" },
-    { key: "vehicleType", label: "Loại xe" },
-    { key: "ticketType", label: "Loại vé" },
-    { key: "price", label: "Phí đăng ký" },
-    { key: "duration", label: "Thời hạn" },
-    { key: "status", label: "Trạng thái", render: (row) => badge(row.status) },
-    { key: "actions", label: "Chức năng", width: "100px", render: () => <ActionButtons editHref="/admin/parkingFeeOfCustomer/form" /> }
-  ];
-
-  return (
-    <AdminTablePage
-      title="Quản lý phí đăng ký"
-      breadcrumbs={[{ label: "Bảng giá", href: "/admin/parkingFeeOfCustomer" }, { label: "Phí đăng ký" }]}
-      tableTitle="Bảng quản lý phí đăng ký"
-      columns={columns}
-      rows={customerParkingFees}
-      filters={<FilterControls selects={[{ name: "vehicleTypeId", placeholder: "Tất cả loại xe", options: vehicleTypes }]} />}
-      actions={addButton("/admin/parkingFeeOfCustomer/form")}
-    />
   );
 }

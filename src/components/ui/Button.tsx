@@ -15,7 +15,7 @@ const variantClassName: Record<ButtonVariant, string> = {
   primary:
     "tw-border-vm-primary tw-bg-vm-primary tw-text-white tw-shadow-[0_12px_24px_rgba(37,99,235,0.18)] hover:tw-bg-vm-primary-hover active:tw-translate-y-px",
   secondary:
-    "tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-text-vm-slate-700 hover:tw-border-[rgba(203,213,225,0.98)] hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900 active:tw-translate-y-px",
+    "tw-border-vm-slate-100 tw-bg-white tw-text-vm-slate-700 hover:tw-border-vm-slate-200 hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900 active:tw-translate-y-px",
   ghost:
     "tw-border-transparent tw-bg-transparent tw-text-vm-slate-700 hover:tw-bg-vm-slate-25 hover:tw-text-vm-primary active:tw-translate-y-px",
   danger:

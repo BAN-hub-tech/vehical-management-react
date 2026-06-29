@@ -155,7 +155,7 @@ export function DatePicker({ ariaLabel, max, min, onChange, placeholder = "Chọ
     <div className="tw-relative tw-w-full" ref={rootRef}>
       <button
         className={cn(
-          "tw-group tw-flex tw-h-[42px] tw-w-full tw-items-center tw-gap-2.5 tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-px-3 tw-text-left tw-text-[0.88rem] tw-font-semibold tw-text-vm-slate-900 tw-transition hover:tw-border-[rgba(203,213,225,0.98)] hover:tw-shadow-[0_0_0_3px_rgba(148,163,184,0.08)] focus-visible:tw-border-vm-primary focus-visible:tw-outline-none focus-visible:tw-shadow-vm-focus",
+          "tw-group tw-flex tw-h-[42px] tw-w-full tw-items-center tw-gap-2.5 tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-px-3 tw-text-left tw-text-[0.88rem] tw-font-semibold tw-text-vm-slate-900 tw-transition hover:tw-border-vm-slate-200 hover:tw-shadow-[0_0_0_3px_rgba(148,163,184,0.08)] focus-visible:tw-border-vm-primary focus-visible:tw-outline-none focus-visible:tw-shadow-vm-focus",
           open ? "tw-border-vm-primary tw-shadow-vm-focus" : "",
         )}
         type="button"
@@ -190,10 +190,10 @@ export function DatePicker({ ariaLabel, max, min, onChange, placeholder = "Chọ
       </button>
 
       {open ? (
-        <div className="tw-absolute tw-left-0 tw-top-[calc(100%+8px)] tw-z-[95] tw-w-[min(304px,calc(100vw-2rem))] tw-rounded-vm-lg tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-p-3.5 tw-shadow-vm-dropdown">
+        <div className="tw-absolute tw-left-0 tw-top-[calc(100%+8px)] tw-z-[95] tw-w-[min(304px,calc(100vw-2rem))] tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-p-3.5 tw-shadow-vm-dropdown">
           <div className="tw-mb-3 tw-flex tw-items-center tw-justify-between tw-gap-3">
             <button
-              className="tw-inline-flex tw-h-[30px] tw-min-w-[30px] tw-items-center tw-justify-center tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-px-2 tw-text-vm-slate-700 tw-transition hover:tw-border-[rgba(203,213,225,0.98)] hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900"
+              className="tw-inline-flex tw-h-[30px] tw-min-w-[30px] tw-items-center tw-justify-center tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-px-2 tw-text-vm-slate-700 tw-transition hover:tw-border-vm-slate-200 hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900"
               type="button"
               aria-label="Trước"
               onClick={() => changeMonth(-1)}
@@ -204,7 +204,7 @@ export function DatePicker({ ariaLabel, max, min, onChange, placeholder = "Chọ
               <button
                 type="button"
                 className={cn(
-                  "tw-h-8 tw-min-w-[74px] tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-px-2 tw-text-[0.86rem] tw-font-black tw-text-vm-slate-900 tw-transition hover:tw-border-[rgba(203,213,225,0.98)] hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900",
+                  "tw-h-8 tw-min-w-[74px] tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-px-2 tw-text-[0.86rem] tw-font-black tw-text-vm-slate-900 tw-transition hover:tw-border-vm-slate-200 hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900",
                   view === "month" ? "tw-border-brand-200 tw-bg-brand-50 tw-text-vm-primary" : "",
                 )}
                 onClick={() => setView((current) => (current === "month" ? "day" : "month"))}
@@ -214,7 +214,7 @@ export function DatePicker({ ariaLabel, max, min, onChange, placeholder = "Chọ
               <button
                 type="button"
                 className={cn(
-                  "tw-h-8 tw-min-w-[74px] tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-px-2 tw-text-[0.86rem] tw-font-black tw-text-vm-slate-900 tw-transition hover:tw-border-[rgba(203,213,225,0.98)] hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900",
+                  "tw-h-8 tw-min-w-[74px] tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-px-2 tw-text-[0.86rem] tw-font-black tw-text-vm-slate-900 tw-transition hover:tw-border-vm-slate-200 hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900",
                   view === "year" ? "tw-border-brand-200 tw-bg-brand-50 tw-text-vm-primary" : "",
                 )}
                 onClick={() => {
@@ -227,7 +227,7 @@ export function DatePicker({ ariaLabel, max, min, onChange, placeholder = "Chọ
               </button>
             </div>
             <button
-              className="tw-inline-flex tw-h-[30px] tw-min-w-[30px] tw-items-center tw-justify-center tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-px-2 tw-text-vm-slate-700 tw-transition hover:tw-border-[rgba(203,213,225,0.98)] hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900"
+              className="tw-inline-flex tw-h-[30px] tw-min-w-[30px] tw-items-center tw-justify-center tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-px-2 tw-text-vm-slate-700 tw-transition hover:tw-border-vm-slate-200 hover:tw-bg-vm-slate-25 hover:tw-text-vm-slate-900"
               type="button"
               aria-label="Sau"
               onClick={() => changeMonth(1)}
@@ -304,10 +304,10 @@ export function DatePicker({ ariaLabel, max, min, onChange, placeholder = "Chọ
 
           {view === "year" ? (
             <>
-              <div className="tw-mb-2 tw-grid tw-grid-cols-[minmax(0,1fr)_auto] tw-items-center tw-gap-1.5 tw-rounded-vm-lg tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-vm-slate-25 tw-p-2">
+              <div className="tw-mb-2 tw-grid tw-grid-cols-[minmax(0,1fr)_auto] tw-items-center tw-gap-1.5 tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-vm-slate-25 tw-p-2">
                 <label className="tw-m-0 tw-grid">
                   <input
-                    className="tw-h-8 tw-min-h-8 tw-w-full tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-px-2 tw-text-[0.8rem] tw-font-black tw-leading-[30px] tw-text-vm-slate-900 tw-outline-none tw-transition placeholder:tw-font-extrabold placeholder:tw-text-slate-400 focus:tw-border-vm-primary focus:tw-shadow-[0_0_0_3px_rgba(37,99,235,0.08)]"
+                    className="tw-h-8 tw-min-h-8 tw-w-full tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-px-2 tw-text-[0.8rem] tw-font-black tw-leading-[30px] tw-text-vm-slate-900 tw-outline-none tw-transition placeholder:tw-font-extrabold placeholder:tw-text-slate-400 focus:tw-border-vm-primary focus:tw-shadow-[0_0_0_3px_rgba(37,99,235,0.08)]"
                     inputMode="numeric"
                     maxLength={4}
                     placeholder="Nhập năm"
@@ -322,7 +322,7 @@ export function DatePicker({ ariaLabel, max, min, onChange, placeholder = "Chọ
                   />
                 </label>
                 <button
-                  className="tw-h-8 tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-brand-50 tw-px-3 tw-text-[0.76rem] tw-font-black tw-text-vm-primary tw-transition hover:tw-border-[rgba(203,213,225,0.98)] hover:tw-bg-brand-100 disabled:tw-cursor-not-allowed disabled:tw-border-vm-slate-200 disabled:tw-bg-vm-slate-50 disabled:tw-text-slate-400"
+                  className="tw-h-8 tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-brand-50 tw-px-3 tw-text-[0.76rem] tw-font-black tw-text-vm-primary tw-transition hover:tw-border-vm-slate-200 hover:tw-bg-brand-100 disabled:tw-cursor-not-allowed disabled:tw-border-vm-slate-200 disabled:tw-bg-vm-slate-50 disabled:tw-text-slate-400"
                   type="button"
                   disabled={isYearDisabled(Number(yearInput), min, max)}
                   onClick={jumpToYear}

@@ -45,11 +45,11 @@ export function Modal({ actions, children, description, onClose, open, title, wi
       <button className="tw-absolute tw-inset-0 tw-border-0 tw-bg-slate-900/50 tw-backdrop-blur-md" type="button" aria-label="Đóng" onClick={onClose} />
       <section
         className={cn(
-          "tw-relative tw-flex tw-max-h-[calc(100vh-2rem)] tw-flex-col tw-overflow-hidden tw-rounded-vm-lg tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-shadow-[0_28px_80px_rgba(15,23,42,0.24)] tw-animate-vm-modal-enter",
+          "tw-relative tw-flex tw-max-h-[calc(100vh-2rem)] tw-flex-col tw-overflow-hidden tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-shadow-[0_28px_80px_rgba(15,23,42,0.24)] tw-animate-vm-modal-enter",
           widthClassName,
         )}
       >
-        <header className="tw-flex tw-items-start tw-justify-between tw-gap-4 tw-border-b tw-border-vm-slate-100 tw-px-5 tw-py-4">
+        <header className="tw-flex tw-items-start tw-justify-between tw-gap-4 tw-border-0 tw-border-b tw-border-solid tw-border-vm-slate-100 tw-px-5 tw-py-4">
           <div>
             <h3 id="vm-modal-title" className="tw-m-0 tw-text-[1.1rem] tw-font-black tw-text-vm-slate-900">
               {title}
@@ -66,7 +66,7 @@ export function Modal({ actions, children, description, onClose, open, title, wi
           </button>
         </header>
         <div className="tw-overflow-y-auto tw-px-5 tw-py-4">{children}</div>
-        {actions ? <footer className="tw-border-t tw-border-vm-slate-100 tw-bg-vm-slate-25 tw-px-5 tw-py-4">{actions}</footer> : null}
+        {actions ? <footer className="tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-bg-vm-slate-25 tw-px-5 tw-py-4">{actions}</footer> : null}
       </section>
     </div>
   );

@@ -6,6 +6,8 @@ type MetricCardProps = {
   contentClassName?: string;
   delta: string;
   deltaClassName: string;
+  footClassName?: string;
+  headClassName?: string;
   icon: ReactNode;
   label: string;
   labelClassName?: string;
@@ -20,6 +22,8 @@ export function MetricCard({
   contentClassName = "",
   delta,
   deltaClassName,
+  footClassName,
+  headClassName,
   icon,
   label,
   labelClassName,
@@ -31,14 +35,14 @@ export function MetricCard({
 
   return (
     <article className={className}>
-      <div className={`${block}__head`}>
+      <div className={headClassName ?? `${block}__head`}>
         {icon}
         <div className={contentClassName}>
           <p className={labelClassName}>{label}</p>
           <strong className={valueClassName}>{value}</strong>
         </div>
       </div>
-      <div className={`${block}__foot`}>
+      <div className={footClassName ?? `${block}__foot`}>
         <span className={deltaClassName}>{delta}</span>
         {sparkline}
       </div>

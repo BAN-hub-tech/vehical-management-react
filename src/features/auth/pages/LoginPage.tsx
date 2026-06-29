@@ -6,6 +6,7 @@ import {
   requestPasswordReset,
   type RegisterAccountRequest,
 } from "@/features/auth/api/authApi";
+import { cn } from "@/lib/cn";
 
 type AuthMode = "login" | "register" | "forgot" | "otp" | "recover";
 
@@ -22,7 +23,6 @@ interface AuthFieldProps {
   autoComplete?: string;
   value?: string;
   onChange?: (value: string) => void;
-  children?: ReactNode;
 }
 
 type RegisterFormState = {
@@ -33,9 +33,9 @@ type RegisterFormState = {
 };
 
 const footerLinks = [
-  { label: "Dieu khoan", href: "/pricing" },
-  { label: "Bao mat", href: "/pricing" },
-  { label: "Lien he", href: "/contact" },
+  { label: "Điều khoản", href: "/pricing" },
+  { label: "Bảo mật", href: "/pricing" },
+  { label: "Liên hệ", href: "/contact" },
 ];
 
 const initialRegisterForm: RegisterFormState = {
@@ -44,6 +44,9 @@ const initialRegisterForm: RegisterFormState = {
   password: "",
   confirmPassword: "",
 };
+
+const authSubmitClassName =
+  "tw-flex tw-min-h-11 tw-w-full tw-items-center tw-justify-center tw-gap-[0.55rem] tw-rounded-[10px] tw-border-0 tw-bg-[linear-gradient(135deg,#2563EB,#1D4ED8)] tw-px-4 tw-text-[0.95rem] tw-font-black tw-text-white tw-shadow-[0_14px_28px_rgba(37,99,235,0.22)] tw-transition hover:-tw-translate-y-px hover:tw-text-white hover:tw-brightness-[0.98] disabled:tw-cursor-not-allowed disabled:tw-opacity-60";
 
 export function LoginPage({ mode = "login" }: AuthPageProps) {
   if (mode === "otp" || mode === "recover") {
@@ -63,28 +66,36 @@ export function LoginPage({ mode = "login" }: AuthPageProps) {
 
 function AuthShell({ children, wide = false, cardClassName = "" }: { children: ReactNode; wide?: boolean; cardClassName?: string }) {
   return (
-    <div className="vm-auth-shell">
-      <header className="vm-auth-topbar">
-        <Link className="vm-auth-brand" to="/pricing">
-          <span className="vm-auth-brand-mark">
-            <img src="/assets/admin/dist/img/AdminLTELogo.png" alt="CoParking" />
+    <div className="tw-fixed tw-inset-0 tw-flex tw-min-h-screen tw-min-h-[100dvh] tw-w-screen tw-flex-col tw-overflow-y-auto tw-bg-[radial-gradient(circle_at_18%_12%,rgba(37,99,235,0.13),transparent_30%),radial-gradient(circle_at_82%_18%,rgba(22,163,74,0.08),transparent_26%),linear-gradient(135deg,#f8fafc_0%,#eef4ff_100%)] tw-text-vm-slate-700">
+      <header className="tw-flex tw-w-full tw-items-center tw-justify-between tw-px-6 tw-py-4 max-[768px]:tw-px-5">
+        <Link className="tw-inline-flex tw-items-center tw-gap-[0.65rem] tw-text-[1.1rem] tw-font-extrabold tw-text-slate-900 tw-no-underline tw-transition hover:tw-text-vm-primary-hover hover:tw-no-underline" to="/pricing">
+          <span className="tw-inline-flex tw-h-10 tw-w-10 tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-[10px] tw-bg-[#f8fafc] tw-shadow-[0_12px_24px_rgba(37,99,235,0.22)]">
+            <img className="tw-h-full tw-w-full tw-object-contain" src="/assets/admin/dist/img/AdminLTELogo.png" alt="CoParking" />
           </span>
           <span>CoParking</span>
         </Link>
-        <Link className="vm-auth-help" to="/contact" aria-label="Tro giup">
+        <Link className="tw-inline-flex tw-h-10 tw-w-10 tw-items-center tw-justify-center tw-rounded-full tw-bg-white tw-text-vm-primary tw-no-underline tw-shadow-[inset_0_0_0_1px_#e2e8f0] tw-transition hover:tw-text-vm-primary-hover" to="/contact" aria-label="Trợ giúp">
           <i className="far fa-question-circle" />
         </Link>
       </header>
 
-      <main className="vm-auth-main">
-        <section className={`vm-auth-card ${wide ? "vm-auth-card-wide" : ""} ${cardClassName}`}>{children}</section>
+      <main className="tw-flex tw-flex-1 tw-items-start tw-justify-center tw-px-6 tw-pb-5 tw-pt-3 max-[768px]:tw-px-5">
+        <section
+          className={cn(
+            "tw-w-[min(100%,440px)] tw-rounded-[12px] tw-border tw-border-solid tw-border-[rgba(203,213,225,0.55)] tw-bg-white/95 tw-p-6 tw-shadow-[0_18px_45px_rgba(15,23,42,0.08)]",
+            wide ? "tw-w-[min(100%,840px)]" : "",
+            cardClassName,
+          )}
+        >
+          {children}
+        </section>
       </main>
 
-      <footer className="vm-auth-footer">
+      <footer className="tw-flex tw-w-full tw-items-center tw-justify-between tw-gap-4 tw-px-6 tw-py-4 tw-text-[0.88rem] tw-font-bold tw-text-vm-slate-500 max-[768px]:tw-flex-col max-[768px]:tw-px-5">
         <span>© 2026 Vehicle Management Platform. All rights reserved.</span>
-        <nav>
+        <nav className="tw-flex tw-items-center tw-gap-5">
           {footerLinks.map((link) => (
-            <Link to={link.href} key={link.label}>
+            <Link className="tw-font-extrabold tw-text-vm-primary tw-no-underline hover:tw-text-vm-primary-hover" to={link.href} key={link.label}>
               {link.label}
             </Link>
           ))}
@@ -96,33 +107,32 @@ function AuthShell({ children, wide = false, cardClassName = "" }: { children: R
 
 function AuthHeader({ title, description, compact = false }: { title: string; description?: string; compact?: boolean }) {
   return (
-    <div className={`vm-auth-header ${compact ? "vm-auth-header-compact" : ""}`}>
-      <div className="vm-auth-logo">
-        <img src="/assets/admin/dist/img/AdminLTELogo.png" alt="CoParking" />
+    <div className={cn("tw-mb-5 tw-text-center", compact ? "tw-mb-4" : "")}>
+      <div className="tw-mx-auto tw-mb-[0.9rem] tw-inline-flex tw-h-[120px] tw-w-[120px] tw-items-center tw-justify-center tw-overflow-hidden tw-bg-transparent">
+        <img className="tw-h-full tw-w-full tw-object-contain" src="/assets/admin/dist/img/AdminLTELogo.png" alt="CoParking" />
       </div>
-      <h1>{title}</h1>
-      {description && <p>{description}</p>}
+      <h1 className="tw-m-0 tw-mb-[0.2rem] tw-text-[1.45rem] tw-font-black tw-leading-tight tw-text-vm-slate-900">{title}</h1>
+      {description && <p className="tw-mx-auto tw-my-0 tw-max-w-[560px] tw-text-[0.96rem] tw-font-normal tw-leading-[1.45] tw-text-vm-slate-500">{description}</p>}
     </div>
   );
 }
 
-function AuthField({ id, label, icon, type = "text", placeholder, autoComplete, value, onChange, children }: AuthFieldProps) {
+function AuthField({ id, label, icon, type = "text", placeholder, autoComplete, value, onChange }: AuthFieldProps) {
   return (
-    <div className="vm-auth-field">
-      <label htmlFor={id}>{label}</label>
-      <div className="vm-auth-input-shell">
-        <i className={icon} />
-        {children ?? (
-          <input
-            id={id}
-            name={id}
-            type={type}
-            placeholder={placeholder}
-            autoComplete={autoComplete}
-            value={value}
-            onChange={(event) => onChange?.(event.target.value)}
-          />
-        )}
+    <div>
+      <label className="tw-mb-[0.45rem] tw-block tw-text-[0.9rem] tw-font-extrabold tw-text-vm-slate-700" htmlFor={id}>{label}</label>
+      <div className="tw-relative">
+        <i className={cn(icon, "tw-absolute tw-left-4 tw-top-1/2 tw-text-vm-slate-500 -tw-translate-y-1/2")} />
+        <input
+          className="tw-min-h-[42px] tw-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-py-[0.62rem] tw-pl-[2.8rem] tw-pr-4 tw-text-vm-slate-900 tw-outline-none tw-transition placeholder:tw-text-slate-400 focus:tw-border-[rgba(37,99,235,0.65)] focus:tw-shadow-[0_0_0_4px_rgba(37,99,235,0.1)]"
+          id={id}
+          name={id}
+          type={type}
+          placeholder={placeholder}
+          autoComplete={autoComplete}
+          value={value}
+          onChange={(event) => onChange?.(event.target.value)}
+        />
       </div>
     </div>
   );
@@ -139,11 +149,12 @@ function PasswordField({
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   return (
-    <div className="vm-auth-field">
-      <label htmlFor={id}>{label}</label>
-      <div className="vm-auth-input-shell">
-        <i className="fas fa-lock" />
+    <div>
+      <label className="tw-mb-[0.45rem] tw-block tw-text-[0.9rem] tw-font-extrabold tw-text-vm-slate-700" htmlFor={id}>{label}</label>
+      <div className="tw-relative">
+        <i className="fas fa-lock tw-absolute tw-left-4 tw-top-1/2 tw-text-vm-slate-500 -tw-translate-y-1/2" />
         <input
+          className="tw-min-h-[42px] tw-w-full tw-rounded-[10px] tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-py-[0.62rem] tw-pl-[2.8rem] tw-pr-12 tw-text-vm-slate-900 tw-outline-none tw-transition placeholder:tw-text-slate-400 focus:tw-border-[rgba(37,99,235,0.65)] focus:tw-shadow-[0_0_0_4px_rgba(37,99,235,0.1)]"
           id={id}
           name={id}
           type={isPasswordVisible ? "text" : "password"}
@@ -153,9 +164,9 @@ function PasswordField({
           onChange={(event) => onChange?.(event.target.value)}
         />
         <button
-          className="vm-auth-eye"
+          className="tw-absolute tw-right-[0.85rem] tw-top-1/2 tw-border-0 tw-bg-transparent tw-p-0 tw-text-vm-slate-500 tw-transition -tw-translate-y-1/2 hover:tw-text-vm-primary"
           type="button"
-          aria-label={isPasswordVisible ? "An mat khau" : "Hien thi mat khau"}
+          aria-label={isPasswordVisible ? "Ẩn mật khẩu" : "Hiển thị mật khẩu"}
           aria-pressed={isPasswordVisible}
           onClick={() => setIsPasswordVisible((currentValue) => !currentValue)}
         >
@@ -167,11 +178,15 @@ function PasswordField({
 }
 
 function AuthAlert({ tone, message }: { tone: "success" | "error" | "info"; message: string }) {
-  const className = tone === "success" ? "vm-auth-note-success" : tone === "error" ? "vm-auth-note-error" : "";
-
   return (
-    <div className={`vm-auth-note ${className}`.trim()}>
-      <i className={tone === "success" ? "fas fa-check-circle" : tone === "error" ? "fas fa-exclamation-circle" : "fas fa-info-circle"} />
+    <div
+      className={cn(
+        "tw-flex tw-gap-[0.65rem] tw-rounded-[10px] tw-border tw-border-solid tw-border-brand-100 tw-bg-brand-50 tw-px-4 tw-py-[0.9rem] tw-font-bold tw-leading-[1.45] tw-text-vm-primary-hover",
+        tone === "success" ? "tw-border-emerald-200 tw-bg-emerald-50 tw-text-emerald-800" : "",
+        tone === "error" ? "tw-border-red-200 tw-bg-red-50 tw-text-red-700" : "",
+      )}
+    >
+      <i className={cn(tone === "success" ? "fas fa-check-circle" : tone === "error" ? "fas fa-exclamation-circle" : "fas fa-info-circle", "tw-mt-[0.15rem] tw-text-vm-primary")} />
       <span>{message}</span>
     </div>
   );
@@ -191,34 +206,34 @@ function LoginScreen() {
   return (
     <AuthShell>
       <AuthHeader
-        title="Dang nhap an toan"
-        description="Dang nhap duoc xu ly boi Keycloak de giu chuan OAuth2/OIDC, MFA va session trung tam."
+        title="Đăng nhập an toàn"
+        description="Đăng nhập được xử lý bởi Keycloak để giữ chuẩn OAuth2/OIDC, MFA và session trung tâm."
       />
 
-      <div className="vm-auth-form">
+      <div className="tw-grid tw-gap-[0.8rem]">
         <AuthAlert
           tone="info"
-          message="Tai khoan nhan vien va khach hang se duoc xac thuc tren trang dang nhap Keycloak da custom theme."
+          message="Tài khoản nhân viên và khách hàng sẽ được xác thực trên trang đăng nhập Keycloak đã custom theme."
         />
 
-        <button className="vm-auth-submit" type="button" onClick={handleLoginRedirect} disabled={!isLoginConfigured}>
-          Dang nhap voi Keycloak
+        <button className={authSubmitClassName} type="button" onClick={handleLoginRedirect} disabled={!isLoginConfigured}>
+          Đăng nhập với Keycloak
         </button>
 
         {!isLoginConfigured && (
           <AuthAlert
             tone="error"
-            message="Chua cau hinh VITE_KEYCLOAK_LOGIN_URL. Hay cap nhat env de frontend redirect dung toi trang login Keycloak."
+            message="Chưa cấu hình VITE_KEYCLOAK_LOGIN_URL. Hãy cập nhật env để frontend redirect đúng tới trang login Keycloak."
           />
         )}
 
-        <div className="vm-auth-options">
-          <span>Can tao tai khoan moi hoac yeu cau dat lai mat khau?</span>
-          <Link to="/forgot-password">Quen mat khau?</Link>
+        <div className="tw-flex tw-items-center tw-justify-between tw-gap-4 tw-py-1 tw-text-[0.9rem] tw-font-bold tw-text-vm-slate-500 max-[480px]:tw-flex-col max-[480px]:tw-items-start">
+          <span>Cần tạo tài khoản mới hoặc yêu cầu đặt lại mật khẩu?</span>
+          <Link className="tw-font-extrabold tw-text-vm-primary tw-no-underline hover:tw-text-vm-primary-hover" to="/forgot-password">Quên mật khẩu?</Link>
         </div>
       </div>
 
-      <AuthSwitch text="Chua co tai khoan?" label="Dang ky" href="/register" />
+      <AuthSwitch text="Chưa có tài khoản?" label="Đăng ký" href="/register" />
     </AuthShell>
   );
 }
@@ -239,7 +254,7 @@ function RegisterScreen() {
     setSuccessMessage("");
 
     if (form.password !== form.confirmPassword) {
-      setErrorMessage("Mat khau xac nhan khong khop.");
+      setErrorMessage("Mật khẩu xác nhận không khớp.");
       return;
     }
 
@@ -256,7 +271,7 @@ function RegisterScreen() {
       setSuccessMessage(response.message);
       setForm(initialRegisterForm);
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : "Khong the tao tai khoan.");
+      setErrorMessage(error instanceof Error ? error.message : "Không thể tạo tài khoản.");
     } finally {
       setIsSubmitting(false);
     }
@@ -265,17 +280,17 @@ function RegisterScreen() {
   return (
     <AuthShell>
       <AuthHeader
-        title="Tao tai khoan moi"
-        description="Dang ky tai khoan chi voi username, email va password. Ho so noi bo se duoc tao toi thieu va co the bo sung sau."
+        title="Tạo tài khoản mới"
+        description="Đăng ký tài khoản chỉ với username, email và password. Hồ sơ nội bộ sẽ được tạo tối thiểu và có thể bổ sung sau."
       />
 
-      <form className="vm-auth-form" onSubmit={handleSubmit}>
+      <form className="tw-grid tw-gap-[0.8rem]" onSubmit={handleSubmit}>
         {successMessage && <AuthAlert tone="success" message={successMessage} />}
         {errorMessage && <AuthAlert tone="error" message={errorMessage} />}
 
         <AuthField
           id="registerUsername"
-          label="Ten dang nhap"
+          label="Tên đăng nhập"
           icon="fas fa-user"
           placeholder="vovantu"
           autoComplete="username"
@@ -294,31 +309,28 @@ function RegisterScreen() {
         />
         <PasswordField
           id="registerPassword"
-          label="Mat khau"
+          label="Mật khẩu"
           autoComplete="new-password"
           value={form.password}
           onChange={(value) => updateField("password", value)}
         />
         <PasswordField
           id="confirmPassword"
-          label="Xac nhan mat khau"
+          label="Xác nhận mật khẩu"
           autoComplete="new-password"
           value={form.confirmPassword}
           onChange={(value) => updateField("confirmPassword", value)}
         />
 
-        <div className="vm-auth-note">
-          <i className="fas fa-shield-alt" />
-          <span>Sau khi tao tai khoan, he thong se gui email verification va tai khoan noi bo se o trang thai PENDING.</span>
-        </div>
+        <AuthAlert tone="info" message="Sau khi tạo tài khoản, hệ thống sẽ gửi email verification và tài khoản nội bộ sẽ ở trạng thái PENDING." />
 
-        <button className="vm-auth-submit" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Dang tao tai khoan..." : "Tao tai khoan va gui email xac minh"}
+        <button className={authSubmitClassName} type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Đang tạo tài khoản..." : "Tạo tài khoản và gửi email xác minh"}
           <i className="fas fa-arrow-right" />
         </button>
       </form>
 
-      <AuthSwitch text="Da co tai khoan?" label="Dang nhap" href="/login" />
+      <AuthSwitch text="Đã có tài khoản?" label="Đăng nhập" href="/login" />
     </AuthShell>
   );
 }
@@ -340,20 +352,20 @@ function ForgotPasswordScreen() {
       setSuccessMessage(response.message);
       setEmail("");
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : "Khong the gui yeu cau dat lai mat khau.");
+      setErrorMessage(error instanceof Error ? error.message : "Không thể gửi yêu cầu đặt lại mật khẩu.");
     } finally {
       setIsSubmitting(false);
     }
   }
 
   return (
-    <AuthShell cardClassName="vm-auth-card-reset">
+    <AuthShell cardClassName="tw-flex tw-min-h-[500px] tw-flex-col">
       <AuthHeader
-        title="Quen mat khau?"
-        description="Nhap email da dang ky. Backend se yeu cau Keycloak gui email reset password den ban."
+        title="Quên mật khẩu?"
+        description="Nhập email đã đăng ký. Backend sẽ yêu cầu Keycloak gửi email reset password đến bạn."
       />
 
-      <form className="vm-auth-form" onSubmit={handleSubmit}>
+      <form className="tw-grid tw-gap-[0.8rem]" onSubmit={handleSubmit}>
         {successMessage && <AuthAlert tone="success" message={successMessage} />}
         {errorMessage && <AuthAlert tone="error" message={errorMessage} />}
 
@@ -368,12 +380,12 @@ function ForgotPasswordScreen() {
           onChange={setEmail}
         />
 
-        <p className="vm-auth-field-note">
-          Link trong email se dua ban toi themed page cua Keycloak de dat lai mat khau mot cach an toan.
+        <p className="tw-mb-[0.1rem] tw-mt-[-0.2rem] tw-text-[0.9rem] tw-font-semibold tw-leading-[1.45] tw-text-vm-slate-500">
+          Link trong email sẽ đưa bạn tới themed page của Keycloak để đặt lại mật khẩu một cách an toàn.
         </p>
 
-        <button className="vm-auth-submit" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Dang gui yeu cau..." : "Gui email dat lai mat khau"}
+        <button className={authSubmitClassName} type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Đang gửi yêu cầu..." : "Gửi email đặt lại mật khẩu"}
         </button>
       </form>
 
@@ -384,19 +396,19 @@ function ForgotPasswordScreen() {
 
 function AuthSwitch({ text, label, href }: { text: string; label: string; href: string }) {
   return (
-    <div className="vm-auth-switch">
+    <div className="tw-mt-4 tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-pt-4 tw-text-center tw-text-vm-slate-500">
       <span>{text}</span>
-      <Link to={href}>{label}</Link>
+      <Link className="tw-ml-[0.35rem] tw-font-extrabold tw-text-vm-primary tw-no-underline hover:tw-text-vm-primary-hover" to={href}>{label}</Link>
     </div>
   );
 }
 
 function AuthBackLink() {
   return (
-    <div className="vm-auth-back">
-      <Link to="/login">
+    <div className="tw-mt-auto tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-pt-4 tw-text-center">
+      <Link className="tw-flex tw-items-center tw-justify-center tw-gap-2 tw-font-extrabold tw-text-vm-primary tw-no-underline hover:tw-text-vm-primary-hover" to="/login">
         <i className="fas fa-arrow-left" />
-        Quay lai dang nhap
+        Quay lại đăng nhập
       </Link>
     </div>
   );

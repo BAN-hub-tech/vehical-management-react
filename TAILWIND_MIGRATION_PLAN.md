@@ -730,6 +730,125 @@ Chuyen hai component dung chung `PaginationFooter` va `StatusTabs` sang Tailwind
 - Visual contract can giu: tabs active nen trang + line xanh duoi; pagination active gradient xanh; dropdown page-size cao 42px va rong 72px tren desktop.
 - Chua migrate bang `vm-catalog-table*`, `vm-card-table*`, `MetricCard`, `DetailPanel` trong pha nay de tranh lam lech UI bang/detail.
 
+## Pha 3.6: MetricCard va Catalog metric/toolbar slice
+
+### Muc tieu
+
+Migrate cum metric va toolbar cua trang Loai ve / Loai phuong tien sang Tailwind noi bo, dam bao giao dien sau migrate khop CSS cu truoc khi xoa block legacy trong `app.css`.
+
+### Phan tich visual contract tu CSS cu
+
+- Catalog metric grid: desktop chia cot theo so metric, gap `0.9rem`, duoi `1100px` ve 2 cot, duoi `760px` ve 1 cot.
+- Metric card: min-height `160px`, padding `1.35rem`, border xam `rgba(226,232,240,0.96)`, radius `10px`, shadow `0 10px 28px rgba(15,23,42,0.045)`.
+- Metric icon: vong tron `66px`, font-size `1.72rem`, tone blue/green/red dung mau cu.
+- Metric text: label `1rem`/800, value `1.8rem`/800, delta `0.84rem`/700, sparkline `108x32`.
+- Catalog toolbar: ticket grid `minmax(280px,1fr) repeat(2,minmax(150px,168px)) auto`; vehicle grid `minmax(280px,1fr) minmax(150px,168px) auto`; padding `1rem`; border-bottom xam mo.
+- Search input: height `42px`, min-height `44px`, translateY `0.48rem`, border xam mo, radius `10px`.
+- Filter select: label `0.78rem`/700, min-width `150px`, select height `42px`.
+- Reset button: height `42px`, gap `0.55rem`, radius `8px`, border xam mo, font `0.92rem`/700.
+
+### Ket qua thuc hien - 28/06/2026
+
+- `MetricCard` duoc mo rong backward-compatible voi `headClassName` va `footClassName`; cac man chua migrate van co the dung class legacy.
+- `CatalogMetricGrid` da migrate sang Tailwind, giu kich thuoc metric card, icon, text, sparkline va breakpoint responsive cu.
+- `CatalogIcon` da migrate sang Tailwind, ep important cho mau/font-size de khong bi selector detail cu de.
+- `FilterToolbar` da migrate search/reset sang Tailwind noi bo, giu API cu va layout cu.
+- `CatalogToolbar` va `CatalogFilterSelect` khong con phu thuoc `vm-catalog-toolbar`, `vm-catalog-search`, `vm-catalog-filter`, `vm-catalog-reset`.
+- Da xoa cac block CSS legacy tu `app.css`: `vm-catalog-metric*`, `vm-catalog-icon*`, `vm-catalog-toolbar*`, `vm-catalog-search*`, `vm-catalog-filter*`, `vm-catalog-reset*`, va responsive orphan tuong ung.
+- `app.css` giam tu 5,627 dong xuong 5,396 dong.
+- Build pass sau khi migrate.
+
+### Rule sau Pha 3.6
+
+- Khong them lai class `vm-catalog-metric*`, `vm-catalog-icon*`, `vm-catalog-toolbar*`, `vm-catalog-search*`, `vm-catalog-filter*`, `vm-catalog-reset*` vao JSX moi.
+- Neu can sua metric card dung chung, sua qua `MetricCard` props hoac Tailwind class tai component goi, khong them CSS page-level vao `app.css`.
+- Neu can sua toolbar/filter dung chung, sua trong `FilterToolbar`, `CatalogToolbar`, hoac `CatalogFilterSelect`.
+- Chua migrate `vm-catalog-table*`, `vm-catalog-detail*`, `vm-catalog-vehicle-card*` trong pha nay de tranh lam lech table/detail/vehicle-card.
+- Khi migrate tiep, uu tien `DetailPanel` hoac `Catalog detail panel` theo tung cum nho, tiep tuc grep class truoc khi xoa CSS.
+
+## Pha 3.7: DetailPanel va Catalog detail slice
+
+### Muc tieu
+
+Migrate `DetailPanel` dung chung va cum thong tin chi tiet cua trang Loai ve / Loai phuong tien sang Tailwind, tiep tuc giam CSS global nhung khong dung den table hoac vehicle card.
+
+### Ket qua thuc hien - 28/06/2026
+
+- `DetailPanel` da tu mang root shell bang Tailwind: flex column, min-height, border, radius 10px, nen trang, shadow va header action.
+- `TicketDetailPanel` va `VehicleDetailPanel` khong con phu thuoc `vm-catalog-detail__*`; cac phan hero, list, meta, empty va update button da map sang Tailwind utility.
+- Import `DetailPanel` trong catalog da chuyen qua bridge `@/components/ui/DetailPanel` theo convention moi.
+- Da xoa CSS legacy khoi `app.css`: `vm-catalog-detail*`, `vm-catalog-pagination*`, `vm-catalog-page-btn*` va responsive orphan tuong ung.
+- `app.css` giam tu 5,396 dong xuong 5,217 dong.
+- Build pass sau khi migrate.
+
+### Rule sau Pha 3.7
+
+- Khong them lai class `vm-catalog-detail*`, `vm-catalog-pagination*`, `vm-catalog-page-btn*` vao JSX moi.
+- Khi dung Tailwind voi `preflight: false`, neu chi tao vien mot canh bang `tw-border-t` hoac `tw-border-b`, bat buoc them `tw-border-0 tw-border-solid` de tranh browser default border-width lam vien day bat thuong.
+- Cac panel chi tiet moi nen dung `DetailPanel` tu `@/components/ui/DetailPanel`, khong tao CSS page-level trong `app.css`.
+- Chua migrate `vm-catalog-table*` va `vm-catalog-vehicle-card*` trong pha nay; day la hai lat cat tiep theo phu hop neu tiep tuc giam `app.css`.
+
+## Pha 3.8: Catalog ticket table slice
+
+### Muc tieu
+
+Migrate bang Loai ve sang Tailwind theo visual contract cu, giu nguyen layout va hanh vi chon dong, khong dung den grid Loai phuong tien.
+
+### Phan tich visual contract tu CSS cu
+
+- Table shell chi can `overflow-x: auto`.
+- Table giu `min-width: 760px`, `margin: 0`; tiep tuc giu class vendor `table` de khong lam lech padding/cell rhythm cua Bootstrap.
+- Header cell: `border-top: 0`, `border-bottom: 1px`, nen trang, chu slate 700, `0.82rem`, font 800, nowrap.
+- Body cell: `border-top: 1px #eef2f7`, chu `#111827`, `0.9rem`, vertical-align middle.
+- Row: cursor pointer, transition background `0.16s`, hover/selected `#eff6ff`.
+- Radio cell: width `44px`, text center.
+- Radio mark: `18px`, border xam, tron full, selected xanh `#2563EB`, icon trang `0.62rem`.
+- Code cell: xanh primary, font 800.
+- Updated cell: grid gap `0.1rem`, strong `0.82rem`.
+
+### Ket qua thuc hien - 28/06/2026
+
+- `TicketCatalogTable` khong con phu thuoc `vm-catalog-table*`, `vm-catalog-radio`, `vm-catalog-updated`.
+- `CatalogStatusBadge` da migrate sang Tailwind va khong con phu thuoc `vm-catalog-status*`.
+- Da xoa CSS legacy khoi `app.css`: `vm-catalog-table*`, `vm-catalog-radio*`, `vm-catalog-status*`, `vm-catalog-updated*`.
+- Build pass sau khi migrate.
+
+### Rule sau Pha 3.8
+
+- Khong them lai class `vm-catalog-table*`, `vm-catalog-radio*`, `vm-catalog-status*`, `vm-catalog-updated*` vao JSX moi.
+- Khi migrate table co dung Bootstrap `.table`, phai map lai border theo Tailwind voi `tw-border-0` truoc `tw-border-t/b` de tranh vien day do `preflight: false`.
+- Chua migrate `vm-catalog-vehicle-card*` trong pha nay; day la lat cat tiep theo phu hop.
+
+## Pha 3.9: Catalog vehicle card slice
+
+### Muc tieu
+
+Migrate grid Loai phuong tien sang Tailwind theo visual contract cu, giu nguyen card layout, selected state, hover state va stats block.
+
+### Phan tich visual contract tu CSS cu
+
+- Vehicle grid: desktop 3 cot, gap `0.9rem`, padding `1rem`; duoi `1100px` ve 2 cot; duoi `760px` ve 1 cot.
+- Vehicle card: `position: relative`, flex column, min-height `260px`, padding `1rem`, border xam 1px, radius `10px`, nen trang, text left, shadow `0 10px 24px rgba(15,23,42,0.035)`.
+- Hover/selected: border `rgba(37,99,235,0.82)`, shadow `0 14px 28px rgba(37,99,235,0.1)`; hover translateY `-1px`.
+- Selected check: top/right `0.9rem`, size `28px`, tron full, nen primary, chu trang, font `0.8rem`.
+- Head: flex align center, gap `0.9rem`; name font `1rem`/800, margin-bottom `0.45rem`.
+- Copy list: grid gap `0.75rem`, margin `1rem 0`; label column `42px`, gap `0.65rem`; dt `0.82rem`/800 slate; dd `0.86rem`/700 `#111827`.
+- Stats: 2 cot, margin-top auto, border `#eef2f7`, radius `8px`, overflow hidden; cell padding `0.8rem 0.65rem`; divider trai 1px; label `0.74rem`/800; value `0.92rem`/800.
+
+### Ket qua thuc hien - 28/06/2026
+
+- `VehicleCatalogGrid` khong con phu thuoc `vm-catalog-vehicle*`.
+- Da map grid/card/check/head/copy/stats sang Tailwind utility theo thong so cu.
+- Da xoa CSS legacy khoi `app.css`: `vm-catalog-vehicle-grid`, `vm-catalog-vehicle-card*` va responsive orphan tuong ung.
+- `app.css` giam xuong 4,999 dong, dat moc duoi 5,000 dong.
+- Build pass sau khi migrate.
+
+### Rule sau Pha 3.9
+
+- Khong them lai class `vm-catalog-vehicle*` vao JSX moi.
+- Divider mot canh trong stats phai dung `tw-border-0 tw-border-l tw-border-solid` de khong bi browser default border-width khi `preflight: false`.
+- Neu tiep tuc catalog, lat cat con lai hop ly la `vm-catalog-header*`, `vm-catalog-btn*`, `vm-catalog-board*` hoac chuyen sang page Quan ly the theo Pha 4.
+
 ## Pha 4: Migrate page theo thứ tự ít rủi ro
 
 ### Thứ tự đề xuất
@@ -978,3 +1097,38 @@ Sau khi audit Pha 0-4, migration Tailwind phai uu tien visual parity truoc khi u
 - Neu UI lech so voi mockup/css cu, uu tien rollback visual layer ve CSS truoc, giu lai tokens/alias/router neu khong gay loi.
 
 Trang thai sau audit: Pha 0-1 giu lai; Pha 2-4 chuyen sang trang thai compatibility-first, khong tiep tuc rewrite utility hang loat cho den khi co visual parity ro rang.
+
+## 14. Rule cap nhat sau dot thu gon app.css
+
+Muc tieu dot nay la giu lai nhung man da duoc duyet UI/UX va blank cac man con lai de tranh keo style cu vao `app.css`.
+
+Whitelist man duoc giu UI:
+
+- Quan ly the: `/admin/card`
+- Loai ve: `/admin/ticket`
+- Loai phuong tien: `/admin/vehicle`
+- Vai tro & Quyen: `/admin/role`
+- Thong tin tai khoan ca nhan: `/admin/profile`
+- Doi mat khau: modal/drawer trong profile/header
+- Auth hien tai: `/login`, `/register`, `/forgot-password`
+
+Rule route:
+
+- Menu van duoc giu day du de khong pha navigation.
+- Route ngoai whitelist render `BlankPage`, khong import page component cu.
+- Khong import barrel export cua cac page da blank neu barrel do keo theo component/table/form cu.
+
+Rule CSS:
+
+- `app.css` chi giu layout/header/sidebar/auth/card/role va nhung compatibility CSS con dung that su.
+- CSS cua page da blank duoc phep xoa khoi `app.css` sau khi da kiem tra route khong con import page do.
+- Khong them CSS global moi cho page da blank; khi lam lai page thi uu tien Tailwind/shared component.
+- Sau moi dot xoa CSS bat buoc chay `npm run build`.
+
+Trang thai dot nay:
+
+- `src/app/routes.tsx` da chuyen cac route ngoai whitelist sang `BlankPage`.
+- `src/features/catalog/index.ts` chi export `TicketListPage`, `VehicleListPage`.
+- `src/features/catalog/pages/CatalogListPages.tsx` da bo `VisitorParkingFeePage` va `RegistrationFeePage` de khong keo table/form cu.
+- `src/app/styles/app.css` da xoa cac block cu: generic page/table/form, dashboard/chart/image preview, client pricing/contact, card duplicate cu.
+- `app.css` giam tu khoang 4.879 dong xuong 3.702 dong.

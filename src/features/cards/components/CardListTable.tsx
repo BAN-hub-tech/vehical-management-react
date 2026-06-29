@@ -1,5 +1,7 @@
+import type { MouseEvent } from "react";
 import { CardStateBadge } from "@/features/cards/components/CardStateBadge";
 import type { CardManageRecord } from "@/features/cards/components/cardManageData";
+import { cn } from "@/lib/cn";
 import { PaginationFooter } from "@/shared/components/ui/PaginationFooter";
 
 interface CardListTableProps {
@@ -17,7 +19,33 @@ interface CardListTableProps {
 }
 
 function HeaderSort() {
-  return <i className="fas fa-sort vm-card-table__sort" aria-hidden="true" />;
+  return <i className="fas fa-sort tw-ml-[0.2rem] tw-text-[0.72rem] tw-text-slate-400" aria-hidden="true" />;
+}
+
+function CheckButton({
+  checked,
+  label,
+  onClick,
+  partial
+}: {
+  checked: boolean;
+  label: string;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  partial?: boolean;
+}) {
+  return (
+    <button
+      className={cn(
+        "tw-inline-flex tw-h-[18px] tw-w-[18px] tw-items-center tw-justify-center tw-rounded tw-border tw-border-solid tw-border-slate-300 tw-bg-white tw-text-[0.66rem] tw-text-white",
+        checked || partial ? "tw-border-vm-primary tw-bg-vm-primary" : "",
+      )}
+      type="button"
+      aria-label={label}
+      onClick={onClick}
+    >
+      {checked ? <i className="fas fa-check" /> : partial ? <i className="fas fa-minus" /> : null}
+    </button>
+  );
 }
 
 export function CardListTable({
@@ -41,20 +69,13 @@ export function CardListTable({
   const someRowsChecked = checkedCount > 0 && checkedCount < rows.length;
 
   return (
-    <div className="vm-card-table-shell">
+    <div className="tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100">
       <div className="table-responsive">
-        <table className="table vm-card-table">
+        <table className="table tw-m-0 tw-border-separate tw-border-spacing-0 [&_td]:tw-text-[0.9rem] [&_thead_th]:tw-bg-white [&_thead_th]:tw-text-[0.82rem] [&_thead_th]:tw-font-bold [&_thead_th]:tw-normal-case [&_thead_th]:tw-tracking-normal [&_thead_th]:tw-text-slate-900">
           <thead>
             <tr>
-              <th className="vm-card-table__checkbox-cell">
-                <button
-                  className={`vm-card-check ${allRowsChecked ? "is-selected" : ""} ${someRowsChecked ? "is-partial" : ""}`}
-                  type="button"
-                  aria-label="Chọn tất cả dòng trong trang"
-                  onClick={onToggleAllRows}
-                >
-                  {allRowsChecked ? <i className="fas fa-check" /> : someRowsChecked ? <i className="fas fa-minus" /> : null}
-                </button>
+              <th className="tw-w-10 !tw-pl-[0.8rem]">
+                <CheckButton checked={allRowsChecked} partial={someRowsChecked} label="Chọn tất cả dòng trong trang" onClick={() => onToggleAllRows()} />
               </th>
               <th>Mã thẻ <HeaderSort /></th>
               <th>Loại thẻ <HeaderSort /></th>
@@ -73,21 +94,18 @@ export function CardListTable({
               const isChecked = checkedIds.includes(row.id);
 
               return (
-                <tr className={isSelected ? "is-selected" : ""} key={row.id} onClick={() => onSelectRow(row.id)}>
-                  <td className="vm-card-table__checkbox-cell">
-                    <button
-                      className={`vm-card-check ${isChecked ? "is-selected" : ""}`}
-                      type="button"
-                      aria-label={`Chọn dòng ${row.cardCode}`}
+                <tr className={isSelected ? "tw-shadow-[inset_3px_0_0_#2563eb] [&>td]:tw-bg-brand-50" : ""} key={row.id} onClick={() => onSelectRow(row.id)}>
+                  <td className="tw-w-10 !tw-pl-[0.8rem]">
+                    <CheckButton
+                      checked={isChecked}
+                      label={`Chọn dòng ${row.cardCode}`}
                       onClick={(event) => {
                         event.stopPropagation();
                         onToggleRowCheck(row.id);
                       }}
-                    >
-                      {isChecked ? <i className="fas fa-check" /> : null}
-                    </button>
+                    />
                   </td>
-                  <td className="vm-card-table__code">{row.cardCode}</td>
+                  <td className="tw-font-bold tw-text-vm-primary">{row.cardCode}</td>
                   <td>{row.cardTypeLabel}</td>
                   <td>{row.vehicleType}</td>
                   <td>{row.customerName ?? "-"}</td>
@@ -95,20 +113,20 @@ export function CardListTable({
                   <td>
                     <CardStateBadge kind="inventory" label={row.inventoryStatusLabel} value={row.inventoryStatus} />
                   </td>
-                  <td className={`vm-card-table__text-state ${row.subscriptionState !== "none" ? "is-highlight" : ""}`}>
+                  <td className={row.subscriptionState !== "none" ? "tw-text-[0.88rem] tw-font-bold tw-text-green-600" : "tw-text-[0.88rem] tw-font-medium tw-text-vm-slate-700"}>
                     {row.subscriptionStateLabel}
                   </td>
                   <td>
                     {row.lostCardState === "open" ? (
-                      <span className="vm-card-table__alert-state">{row.lostCardStateLabel}</span>
+                      <span className="tw-text-[0.88rem] tw-font-bold tw-text-red-500">{row.lostCardStateLabel}</span>
                     ) : (
-                      <span className="vm-card-table__muted-pill">{row.lostCardStateLabel}</span>
+                      <span className="tw-inline-flex tw-min-h-6 tw-items-center tw-justify-center tw-rounded-full tw-bg-slate-100 tw-px-[0.6rem] tw-py-[0.2rem] tw-text-[0.78rem] tw-font-bold tw-text-slate-600">{row.lostCardStateLabel}</span>
                     )}
                   </td>
                   <td>
-                    <div className="vm-card-table__updated">
-                      <span>{row.updatedDate}</span>
-                      <strong>{row.updatedTime}</strong>
+                    <div className="tw-grid tw-gap-[0.15rem]">
+                      <span className="tw-text-[0.88rem] tw-text-vm-slate-700">{row.updatedDate}</span>
+                      <strong className="tw-text-[0.88rem] tw-font-medium tw-text-slate-900">{row.updatedTime}</strong>
                     </div>
                   </td>
                 </tr>
@@ -120,6 +138,7 @@ export function CardListTable({
 
       <PaginationFooter
         ariaLabel="Card pagination"
+        className="tw-bg-white"
         currentPage={currentPage}
         endIndex={endIndex}
         onPageChange={onPageChange}

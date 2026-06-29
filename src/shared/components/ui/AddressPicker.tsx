@@ -74,7 +74,7 @@ export function AddressPicker({ onChange, value }: AddressPickerProps) {
   };
 
   return (
-    <div className="tw-grid tw-grid-cols-2 tw-gap-3 tw-rounded-vm-lg tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-vm-slate-25 tw-p-3 max-[900px]:tw-grid-cols-1">
+    <div className="tw-grid tw-grid-cols-2 tw-gap-3 tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-vm-slate-25 tw-p-3 max-[900px]:tw-grid-cols-1">
       <label className="tw-grid tw-min-w-0 tw-gap-2">
         <span className="tw-text-[0.86rem] tw-font-black tw-text-vm-slate-700">Tỉnh/Thành phố</span>
         <SelectMenu
@@ -117,7 +117,7 @@ export function AddressPicker({ onChange, value }: AddressPickerProps) {
       <label className="tw-col-span-full tw-grid tw-gap-2">
         <span className="tw-text-[0.86rem] tw-font-black tw-text-vm-slate-700">Địa chỉ cụ thể</span>
         <input
-          className="tw-h-[42px] tw-w-full tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-px-3 tw-text-[0.88rem] tw-font-semibold tw-text-vm-slate-900 tw-outline-none tw-transition placeholder:tw-text-vm-slate-500 hover:tw-border-[rgba(203,213,225,0.98)] focus:tw-border-vm-primary focus:tw-shadow-vm-focus"
+          className="tw-h-[42px] tw-w-full tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-px-3 tw-text-[0.88rem] tw-font-semibold tw-text-vm-slate-900 tw-outline-none tw-transition placeholder:tw-text-vm-slate-500 hover:tw-border-vm-slate-200 focus:tw-border-vm-primary focus:tw-shadow-vm-focus"
           value={state.detail}
           placeholder="Số nhà, tên đường"
           onChange={(event) => {

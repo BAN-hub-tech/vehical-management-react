@@ -96,16 +96,16 @@ export function CardListPage() {
   };
 
   return (
-    <div className="content-header vm-card-content-header">
-      <section className="content vm-admin-content">
-        <div className="container-fluid">
-          <div className="vm-card-manage-page">
+    <div className="content-header tw-px-0 tw-pb-4 tw-pt-3">
+      <section className="content tw-pb-8">
+        <div className="container-fluid tw-max-w-[1480px]">
+          <div className="tw-flex tw-flex-col tw-gap-[1.1rem] tw-rounded-vm-lg tw-border tw-border-solid tw-border-slate-200/90 tw-bg-white tw-p-4 tw-pt-[0.85rem] tw-shadow-[0_16px_34px_rgba(15,23,42,0.04)]">
             <CardManageHeader />
             <CardSummaryGrid items={cardSummaryMetrics} />
             <div className="tw-flex tw-items-center tw-gap-[0.7rem]">
               <CardStatusTabs activeValue={activeStatus} counts={cardStatusCounts} onChange={setActiveStatus} tabs={cardStatusTabs} />
               <button
-                className="btn vm-card-manage-header__export tw-ml-auto !tw-min-h-11 !tw-flex-shrink-0 !tw-rounded-vm-lg !tw-px-4"
+                className="tw-ml-auto tw-inline-flex tw-min-h-11 tw-flex-shrink-0 tw-items-center tw-gap-[0.8rem] tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-px-4 tw-text-[0.92rem] tw-font-bold tw-text-vm-slate-700 tw-shadow-[0_8px_20px_rgba(15,23,42,0.04)] tw-transition-colors hover:tw-bg-vm-slate-25 [&_i:last-child]:tw-text-[0.8rem] [&_i:last-child]:tw-text-vm-slate-500"
                 type="button"
                 onClick={() => setIsExportDrawerOpen(true)}
               >
@@ -115,9 +115,9 @@ export function CardListPage() {
               </button>
             </div>
 
-            <div className="vm-card-manage-board">
-              <section className="vm-card-manage-main">
-                <div className="vm-card-surface">
+            <div className="tw-grid tw-grid-cols-1 tw-items-start tw-gap-[0.9rem]">
+              <section className="tw-min-w-0">
+                <div className="tw-min-w-0 tw-overflow-hidden tw-rounded-vm-lg tw-border tw-border-solid tw-border-slate-200/95 tw-bg-white tw-shadow-[0_14px_36px_rgba(15,23,42,0.05)]">
                   <CardToolbar
                     cardTypeValue={cardTypeValue}
                     inventoryStatusValue={inventoryStatusValue}

@@ -162,7 +162,7 @@ function IdentityCard({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   return (
-    <Card className="tw-grid tw-min-w-0 tw-justify-items-center tw-rounded-vm-lg tw-border tw-border-solid !tw-border-[#E2E8F0] tw-p-[1.05rem] tw-text-center tw-shadow-[0_14px_36px_rgba(15,23,42,0.05)]">
+    <Card className="tw-grid tw-min-w-0 tw-justify-items-center tw-rounded-vm-lg tw-border tw-border-solid !tw-border-vm-slate-100 tw-p-[1.05rem] tw-text-center tw-shadow-[0_14px_36px_rgba(15,23,42,0.05)]">
       <div className="tw-relative tw-h-28 tw-w-28">
         <img
           src={avatarUrl}
@@ -170,7 +170,7 @@ function IdentityCard({
           className="tw-h-28 tw-w-28 tw-rounded-full tw-border-[3px] tw-border-brand-100 tw-object-cover tw-shadow-[0_14px_24px_rgba(37,99,235,0.14)]"
         />
         <button
-          className="tw-absolute tw-bottom-[0.15rem] tw-right-0 tw-inline-flex tw-h-[34px] tw-w-[34px] tw-items-center tw-justify-center tw-rounded-vm-lg tw-border tw-border-solid tw-border-[rgba(226,232,240,0.96)] tw-bg-white tw-text-vm-primary tw-shadow-[0_10px_20px_rgba(15,23,42,0.14)] tw-transition hover:tw-border-[rgba(203,213,225,0.98)] hover:tw-bg-vm-slate-25"
+          className="tw-absolute tw-bottom-[0.15rem] tw-right-0 tw-inline-flex tw-h-[34px] tw-w-[34px] tw-items-center tw-justify-center tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-text-vm-primary tw-shadow-[0_10px_20px_rgba(15,23,42,0.14)] tw-transition hover:tw-border-vm-slate-200 hover:tw-bg-vm-slate-25"
           type="button"
           onClick={() => fileInputRef.current?.click()}
         >
@@ -201,15 +201,15 @@ function IdentityCard({
       </div>
 
       <dl className="tw-mt-4 tw-grid tw-w-full tw-gap-[0.7rem]">
-        <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-t tw-border-vm-slate-100 tw-pt-3 tw-text-left">
+        <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-pt-3 tw-text-left">
           <dt className="tw-text-[0.8rem] tw-font-extrabold tw-text-vm-slate-500">Mã nhân viên</dt>
           <dd className="tw-m-0 tw-break-words tw-text-[0.88rem] tw-font-extrabold tw-text-vm-slate-900">{profile.employee?.employeeCode ?? "-"}</dd>
         </div>
-        <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-t tw-border-vm-slate-100 tw-pt-3 tw-text-left">
+        <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-pt-3 tw-text-left">
           <dt className="tw-text-[0.8rem] tw-font-extrabold tw-text-vm-slate-500">Chức danh</dt>
           <dd className="tw-m-0 tw-break-words tw-text-[0.88rem] tw-font-extrabold tw-text-vm-slate-900">{profile.employee?.jobTitle ?? roleLabel()}</dd>
         </div>
-        <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-t tw-border-vm-slate-100 tw-pt-3 tw-text-left">
+        <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-pt-3 tw-text-left">
           <dt className="tw-text-[0.8rem] tw-font-extrabold tw-text-vm-slate-500">Ngày vào làm</dt>
           <dd className="tw-m-0 tw-break-words tw-text-[0.88rem] tw-font-extrabold tw-text-vm-slate-900">{profile.employee?.hiredAt ?? "-"}</dd>
         </div>
@@ -335,25 +335,25 @@ function ChangePasswordModal({
 
 function StatusPanel({ onChangePassword, profile }: { onChangePassword: () => void; profile: AccountProfileStatusResponse }) {
   return (
-    <Card className="tw-min-w-0 tw-rounded-vm-lg tw-border tw-border-solid !tw-border-[#E2E8F0] tw-p-4 tw-shadow-[0_14px_36px_rgba(15,23,42,0.05)] max-[1320px]:tw-col-span-full max-[900px]:tw-col-auto">
+    <Card className="tw-min-w-0 tw-rounded-vm-lg tw-border tw-border-solid !tw-border-vm-slate-100 tw-p-4 tw-shadow-[0_14px_36px_rgba(15,23,42,0.05)] max-[1320px]:tw-col-span-full max-[900px]:tw-col-auto">
       <h3 className="tw-m-0 tw-text-vm-section-title tw-font-black tw-text-vm-slate-900">Trạng thái hệ thống</h3>
 
       <div className="tw-mt-4 tw-grid tw-gap-3 max-[1320px]:tw-grid-cols-3 max-[900px]:tw-grid-cols-1">
-        <article className="tw-grid tw-min-h-[74px] tw-grid-cols-[48px_minmax(0,1fr)] tw-items-center tw-gap-3.5 tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.9)] tw-bg-white tw-p-3">
+        <article className="tw-grid tw-min-h-[74px] tw-grid-cols-[48px_minmax(0,1fr)] tw-items-center tw-gap-3.5 tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-p-3">
           <i className="fas fa-user-shield tw-inline-flex tw-h-12 tw-w-12 tw-items-center tw-justify-center tw-rounded-vm-lg tw-bg-brand-50 tw-text-[1.2rem] tw-text-vm-primary" />
           <div>
             <span className="tw-text-[0.78rem] tw-font-extrabold tw-text-vm-slate-500">Tài khoản</span>
             <strong className="tw-mt-1 tw-block tw-text-[0.94rem] tw-font-black tw-text-vm-slate-900">{statusLabel(profile.account?.accountStatus)}</strong>
           </div>
         </article>
-        <article className="tw-grid tw-min-h-[74px] tw-grid-cols-[48px_minmax(0,1fr)] tw-items-center tw-gap-3.5 tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.9)] tw-bg-white tw-p-3">
+        <article className="tw-grid tw-min-h-[74px] tw-grid-cols-[48px_minmax(0,1fr)] tw-items-center tw-gap-3.5 tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-p-3">
           <i className="fas fa-id-badge tw-inline-flex tw-h-12 tw-w-12 tw-items-center tw-justify-center tw-rounded-vm-lg tw-bg-brand-50 tw-text-[1.2rem] tw-text-vm-primary" />
           <div>
             <span className="tw-text-[0.78rem] tw-font-extrabold tw-text-vm-slate-500">Hồ sơ</span>
             <strong className="tw-mt-1 tw-block tw-text-[0.94rem] tw-font-black tw-text-vm-slate-900">{statusLabel(profile.profile?.userProfileStatus)}</strong>
           </div>
         </article>
-        <article className="tw-grid tw-min-h-[74px] tw-grid-cols-[48px_minmax(0,1fr)] tw-items-center tw-gap-3.5 tw-rounded-vm-md tw-border tw-border-solid tw-border-[rgba(226,232,240,0.9)] tw-bg-white tw-p-3">
+        <article className="tw-grid tw-min-h-[74px] tw-grid-cols-[48px_minmax(0,1fr)] tw-items-center tw-gap-3.5 tw-rounded-vm-md tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-p-3">
           <i className="fas fa-briefcase tw-inline-flex tw-h-12 tw-w-12 tw-items-center tw-justify-center tw-rounded-vm-lg tw-bg-brand-50 tw-text-[1.2rem] tw-text-vm-primary" />
           <div>
             <span className="tw-text-[0.78rem] tw-font-extrabold tw-text-vm-slate-500">Nhân sự</span>
@@ -362,7 +362,7 @@ function StatusPanel({ onChangePassword, profile }: { onChangePassword: () => vo
         </article>
       </div>
 
-      <div className="tw-mt-4 tw-border-t tw-border-vm-slate-100 tw-pt-4">
+      <div className="tw-mt-4 tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-pt-4">
         <div className="tw-flex tw-items-center tw-justify-between tw-gap-3">
           <h4 className="tw-m-0 tw-text-[1rem] tw-font-black tw-text-vm-slate-900">Bảo mật đăng nhập</h4>
           <Button className="tw-h-9 tw-flex-shrink-0 tw-whitespace-nowrap tw-px-3.5 tw-text-[0.84rem]" variant="secondary" type="button" onClick={onChangePassword}>
@@ -371,11 +371,11 @@ function StatusPanel({ onChangePassword, profile }: { onChangePassword: () => vo
           </Button>
         </div>
         <dl className="tw-mt-4 tw-grid tw-w-full tw-gap-3">
-          <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-t tw-border-vm-slate-100 tw-pt-3">
+          <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-pt-3">
             <dt className="tw-text-[0.8rem] tw-font-extrabold tw-text-vm-slate-500">Username</dt>
             <dd className="tw-m-0 tw-break-words tw-text-[0.88rem] tw-font-extrabold tw-text-vm-slate-900">{profile.account?.username ?? "-"}</dd>
           </div>
-          <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-t tw-border-vm-slate-100 tw-pt-3">
+          <div className="tw-grid tw-grid-cols-[minmax(86px,0.72fr)_minmax(0,1fr)] tw-items-start tw-gap-3 tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-pt-3">
             <dt className="tw-text-[0.8rem] tw-font-extrabold tw-text-vm-slate-500">Keycloak ID</dt>
             <dd className="tw-m-0 tw-break-words tw-text-[0.88rem] tw-font-extrabold tw-text-vm-slate-900">{profile.account?.keycloakUserId ?? "-"}</dd>
           </div>
@@ -550,10 +550,10 @@ export function InternalProfilePage() {
   };
 
   return (
-    <div className="content-header vm-card-content-header">
-      <section className="content vm-admin-content">
-        <div className="container-fluid">
-          <div className="tw-grid tw-gap-4 tw-rounded-vm-lg tw-border tw-border-solid tw-border-[rgba(226,232,240,0.9)] tw-bg-white tw-p-4 tw-shadow-[0_16px_34px_rgba(15,23,42,0.04)]">
+    <div className="content-header tw-px-0 tw-pb-4 tw-pt-3">
+      <section className="content tw-pb-8">
+        <div className="container-fluid tw-max-w-[1480px]">
+          <div className="tw-grid tw-gap-4 tw-rounded-vm-lg tw-border tw-border-solid tw-border-vm-slate-100 tw-bg-white tw-p-4 tw-shadow-[0_16px_34px_rgba(15,23,42,0.04)]">
             <header className="tw-flex tw-items-center tw-justify-between tw-gap-4 tw-px-1 tw-pb-[0.65rem] tw-pt-[0.3rem] max-[900px]:tw-flex-col max-[900px]:tw-items-stretch">
               <div>
                 <h2 className="tw-m-0 tw-text-vm-page-title tw-font-extrabold tw-leading-none tw-text-[#111827]">Thông tin tài khoản</h2>
@@ -583,7 +583,7 @@ export function InternalProfilePage() {
             <div className="tw-grid tw-grid-cols-[minmax(250px,290px)_minmax(0,1fr)_minmax(270px,300px)] tw-items-start tw-gap-[0.9rem] max-[1320px]:tw-grid-cols-[minmax(240px,280px)_minmax(0,1fr)] max-[900px]:tw-grid-cols-1">
               <IdentityCard avatarUrl={avatarUrl} displayName={displayName} onAvatarChange={handleAvatarChange} onAvatarDelete={handleAvatarDelete} profile={profile} />
 
-              <Card className="tw-min-w-0 tw-rounded-vm-lg tw-border tw-border-solid !tw-border-[#E2E8F0] tw-p-4 tw-shadow-[0_14px_36px_rgba(15,23,42,0.05)]">
+              <Card className="tw-min-w-0 tw-rounded-vm-lg tw-border tw-border-solid !tw-border-vm-slate-100 tw-p-4 tw-shadow-[0_14px_36px_rgba(15,23,42,0.05)]">
                 <div className="tw-mb-4 tw-flex tw-items-center tw-justify-between tw-gap-4 max-[900px]:tw-flex-col max-[900px]:tw-items-stretch">
                   <div>
                     <h3 className="tw-m-0 tw-text-vm-section-title tw-font-black tw-text-[#111827]">Hồ sơ cá nhân</h3>

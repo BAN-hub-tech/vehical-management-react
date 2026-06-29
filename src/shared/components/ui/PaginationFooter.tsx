@@ -55,7 +55,7 @@ export function PaginationFooter({
   return (
     <div
       className={cn(
-        "tw-flex tw-items-center tw-justify-between tw-gap-4 tw-border-t tw-border-solid tw-border-[rgba(226,232,240,0.9)] tw-px-4 tw-pb-4 tw-pt-[0.9rem] max-[900px]:tw-flex-col max-[900px]:tw-items-stretch",
+        "tw-flex tw-items-center tw-justify-between tw-gap-4 tw-border-0 tw-border-t tw-border-solid tw-border-vm-slate-100 tw-px-4 tw-pb-4 tw-pt-[0.9rem] max-[900px]:tw-flex-col max-[900px]:tw-items-stretch",
         className,
       )}
     >
@@ -73,6 +73,7 @@ export function PaginationFooter({
             className="!tw-w-[72px] max-[900px]:!tw-w-full"
             value={String(pageSize)}
             options={pageSizeOptions.map((option) => ({ label: String(option), value: String(option) }))}
+            placement="top"
             onChange={(nextValue) => onPageSizeChange(Number(nextValue))}
           />
         </label>

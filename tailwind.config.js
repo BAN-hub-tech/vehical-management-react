@@ -61,9 +61,29 @@ export default {
           from: { opacity: "0", transform: "translateY(10px) scale(0.98)" },
           to: { opacity: "1", transform: "translateY(0) scale(1)" },
         },
+        "vm-drawer-panel-in": {
+          from: { transform: "translate3d(104%, 0, 0)" },
+          to: { transform: "translate3d(0, 0, 0)" },
+        },
+        "vm-drawer-panel-out": {
+          from: { transform: "translate3d(0, 0, 0)" },
+          to: { transform: "translate3d(104%, 0, 0)" },
+        },
+        "vm-drawer-backdrop-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "vm-drawer-backdrop-out": {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
       },
       animation: {
         "vm-modal-enter": "vm-modal-enter 0.22s ease both",
+        "vm-drawer-panel-in": "vm-drawer-panel-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "vm-drawer-panel-out": "vm-drawer-panel-out 0.24s cubic-bezier(0.4, 0, 0.2, 1) both",
+        "vm-drawer-backdrop-in": "vm-drawer-backdrop-in 0.2s ease-out both",
+        "vm-drawer-backdrop-out": "vm-drawer-backdrop-out 0.2s ease-in both",
       },
     },
   },
