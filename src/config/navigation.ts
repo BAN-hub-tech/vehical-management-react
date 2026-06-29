@@ -50,7 +50,7 @@ export const adminNavigation: AdminSidebarEntry[] = [
     label: "Thành viên",
     icon: "members",
     items: [
-      { label: "Tài khoản", to: "/admin/account", matches: ["/admin/account"] },
+      { label: "Nhân viên", to: "/admin/employee", matches: ["/admin/employee"] },
       { label: "Khách hàng", to: "/admin/customer", matches: ["/admin/customer"] },
     ],
   },
@@ -60,6 +60,7 @@ export const adminNavigation: AdminSidebarEntry[] = [
     label: "Cài đặt hệ thống",
     icon: "settings",
     items: [
+      { label: "Tài khoản", to: "/admin/account", matches: ["/admin/account"] },
       { label: "Vai trò & Quyền", to: "/admin/role", matches: ["/admin/role"] },
     ],
   },

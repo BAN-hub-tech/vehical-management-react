@@ -4,7 +4,9 @@ import type { AppLayout } from "@/shared/types/common";
 import { LoginPage } from "@/features/auth";
 import { CardListPage } from "@/features/cards";
 import { TicketListPage, VehicleListPage } from "@/features/catalog";
-import { InternalProfilePage, RoleListPage } from "@/features/iam";
+import { CustomerListPage } from "@/features/customers";
+import { EmployeeListPage } from "@/features/employees";
+import { AccountListPage, InternalProfilePage, RoleListPage } from "@/features/iam";
 
 export interface RouteDefinition {
   path: string;
@@ -36,10 +38,12 @@ export const routes: RouteDefinition[] = [
   { path: "/admin/visitorParkingFee/form", title: "Thong tin phi vang lai", layout: "admin", element: blankPage },
   { path: "/admin/parkingFeeOfCustomer", title: "Phi dang ky", layout: "admin", element: blankPage },
   { path: "/admin/parkingFeeOfCustomer/form", title: "Thong tin phi dang ky", layout: "admin", element: blankPage },
-  { path: "/admin/account", title: "Quan ly tai khoan", layout: "admin", element: blankPage },
+  { path: "/admin/employee", title: "Nhân viên", layout: "admin", element: <EmployeeListPage /> },
+  { path: "/admin/employee/form", title: "Thong tin nhan vien", layout: "admin", element: blankPage },
+  { path: "/admin/account", title: "Tài khoản", layout: "admin", element: <AccountListPage /> },
   { path: "/admin/account/form", title: "Thong tin tai khoan", layout: "admin", element: blankPage },
   { path: "/admin/profile", title: "Thong tin tai khoan ca nhan", layout: "admin", element: <InternalProfilePage /> },
-  { path: "/admin/customer", title: "Quan ly khach hang", layout: "admin", element: blankPage },
+  { path: "/admin/customer", title: "Quản lý khách hàng", layout: "admin", element: <CustomerListPage /> },
   { path: "/admin/customer/form", title: "Thong tin khach hang", layout: "admin", element: blankPage },
   { path: "/admin/role", title: "Phan quyen vai tro", layout: "admin", element: <RoleListPage /> },
   { path: "/admin/role/form", title: "Thong tin vai tro", layout: "admin", element: blankPage },
