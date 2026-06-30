@@ -5,8 +5,9 @@ import { LoginPage } from "@/features/auth";
 import { CardListPage } from "@/features/cards";
 import { TicketListPage, VehicleListPage } from "@/features/catalog";
 import { CustomerListPage } from "@/features/customers";
-import { EmployeeListPage } from "@/features/employees";
+import { EmployeeListPage, ShiftSchedulePage } from "@/features/employees";
 import { AccountListPage, InternalProfilePage, RoleListPage } from "@/features/iam";
+import { ParkingOperationsPage } from "@/features/parking";
 
 export interface RouteDefinition {
   path: string;
@@ -34,12 +35,14 @@ export const routes: RouteDefinition[] = [
   { path: "/admin/ticket/form", title: "Thong tin ve", layout: "admin", element: blankPage },
   { path: "/admin/vehicle", title: "Quan ly phuong tien", layout: "admin", element: <VehicleListPage /> },
   { path: "/admin/vehicle/form", title: "Thong tin phuong tien", layout: "admin", element: blankPage },
+  { path: "/admin/parking-lots", title: "Bãi xe & Sơ đồ vận hành", layout: "admin", element: <ParkingOperationsPage /> },
   { path: "/admin/visitorParkingFee", title: "Phi vang lai", layout: "admin", element: blankPage },
   { path: "/admin/visitorParkingFee/form", title: "Thong tin phi vang lai", layout: "admin", element: blankPage },
   { path: "/admin/parkingFeeOfCustomer", title: "Phi dang ky", layout: "admin", element: blankPage },
   { path: "/admin/parkingFeeOfCustomer/form", title: "Thong tin phi dang ky", layout: "admin", element: blankPage },
   { path: "/admin/employee", title: "Nhân viên", layout: "admin", element: <EmployeeListPage /> },
   { path: "/admin/employee/form", title: "Thong tin nhan vien", layout: "admin", element: blankPage },
+  { path: "/admin/shifts", title: "Ca trực & Phân công", layout: "admin", element: <ShiftSchedulePage /> },
   { path: "/admin/account", title: "Tài khoản", layout: "admin", element: <AccountListPage /> },
   { path: "/admin/account/form", title: "Thong tin tai khoan", layout: "admin", element: blankPage },
   { path: "/admin/profile", title: "Thong tin tai khoan ca nhan", layout: "admin", element: <InternalProfilePage /> },

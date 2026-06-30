@@ -14,6 +14,7 @@ function SidebarIcon({ icon }: { icon: AdminSidebarIcon }) {
     swipe: "fas fa-car-side",
     card: "fas fa-credit-card",
     catalog: "fas fa-ticket-alt",
+    parking: "fas fa-parking",
     pricing: "fas fa-file-invoice-dollar",
     members: "fas fa-users",
     role: "fas fa-user-shield",

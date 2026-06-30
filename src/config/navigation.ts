@@ -27,6 +27,13 @@ export const adminNavigation: AdminSidebarEntry[] = [
     ],
   },
   {
+    kind: "link",
+    label: "Bãi xe",
+    to: "/admin/parking-lots",
+    matches: ["/admin/parking-lots"],
+    icon: "parking",
+  },
+  {
     kind: "group",
     label: "Vé và phương tiện",
     icon: "catalog",
@@ -47,10 +54,11 @@ export const adminNavigation: AdminSidebarEntry[] = [
   },
   {
     kind: "group",
-    label: "Thành viên",
+    label: "Nhân sự",
     icon: "members",
     items: [
       { label: "Nhân viên", to: "/admin/employee", matches: ["/admin/employee"] },
+      { label: "Ca trực", to: "/admin/shifts", matches: ["/admin/shifts"] },
       { label: "Khách hàng", to: "/admin/customer", matches: ["/admin/customer"] },
     ],
   },
