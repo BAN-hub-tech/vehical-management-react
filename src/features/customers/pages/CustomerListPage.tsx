@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { Badge, Button, Card, EntityAvatar, InfoBanner } from "@/components/ui";
+import { openSupportCenterConversation } from "@/features/support";
 import { cn } from "@/lib/cn";
 
 type ApprovalStatus = "APPROVED" | "PENDING" | "VIP";
@@ -196,33 +197,44 @@ function CustomerMetric({
 
 function CustomerListItem({
   customer,
+  onContact,
   selected,
   onSelect,
 }: {
   customer: Customer;
+  onContact: () => void;
   onSelect: () => void;
   selected: boolean;
 }) {
   return (
-    <button
-      type="button"
+    <article
       className={cn(
-        "tw-flex tw-w-full tw-items-center tw-gap-3 tw-rounded-vm-md tw-border tw-border-solid tw-bg-white tw-px-3 tw-py-2.5 tw-text-left tw-transition",
+        "tw-flex tw-w-full tw-items-center tw-gap-2 tw-rounded-vm-md tw-border tw-border-solid tw-bg-white tw-p-1.5 tw-transition",
         selected
           ? "tw-border-vm-primary tw-bg-brand-50 tw-shadow-[inset_3px_0_0_#2563EB,0_8px_18px_rgba(37,99,235,0.08)]"
           : "tw-border-transparent hover:tw-border-brand-100 hover:tw-bg-vm-slate-25",
       )}
-      onClick={onSelect}
     >
-      <EntityAvatar initials={customer.initials} size="sm" />
-      <span className="tw-min-w-0 tw-flex-1">
-        <strong className="tw-block tw-truncate tw-text-[0.83rem] tw-font-extrabold tw-text-vm-slate-900">{customer.name}</strong>
-        <small className="tw-block tw-truncate tw-text-[0.74rem] tw-font-semibold tw-text-vm-slate-500">{customer.code}</small>
-      </span>
-      <Badge tone={approvalBadgeTone(customer.approval)} className="tw-rounded-full tw-px-2 tw-text-[0.62rem]">
-        {customer.approval}
-      </Badge>
-    </button>
+      <button type="button" className="tw-flex tw-min-w-0 tw-flex-1 tw-items-center tw-gap-3 tw-border-0 tw-bg-transparent tw-px-1 tw-py-1 tw-text-left" onClick={onSelect}>
+        <EntityAvatar initials={customer.initials} size="sm" />
+        <span className="tw-min-w-0 tw-flex-1">
+          <strong className="tw-block tw-truncate tw-text-[0.83rem] tw-font-extrabold tw-text-vm-slate-900">{customer.name}</strong>
+          <small className="tw-block tw-truncate tw-text-[0.74rem] tw-font-semibold tw-text-vm-slate-500">{customer.code}</small>
+        </span>
+        <Badge tone={approvalBadgeTone(customer.approval)} className="tw-rounded-full tw-px-2 tw-text-[0.62rem]">
+          {customer.approval}
+        </Badge>
+      </button>
+      <button
+        type="button"
+        className="tw-inline-flex tw-h-8 tw-w-8 tw-flex-shrink-0 tw-items-center tw-justify-center tw-rounded-vm-md tw-border tw-border-solid tw-border-brand-100 tw-bg-white tw-text-vm-primary hover:tw-bg-brand-50"
+        onClick={onContact}
+        aria-label={`Liên hệ ${customer.name}`}
+        title="Liên hệ"
+      >
+        <i className="far fa-comment-dots tw-text-[0.9rem]" />
+      </button>
+    </article>
   );
 }
 
@@ -306,7 +318,7 @@ export function CustomerListPage() {
           <CustomerMetric icon="far fa-credit-card" iconClassName="tw-bg-green-50 tw-text-green-600" label="Vé đang hiệu lực" value="856" />
         </div>
 
-        <div className="tw-mt-5 tw-grid tw-grid-cols-[280px_minmax(0,1fr)_278px] tw-gap-4 max-[1280px]:tw-grid-cols-[270px_minmax(0,1fr)] max-[960px]:tw-grid-cols-1">
+        <div className="tw-mt-5 tw-grid tw-grid-cols-[340px_minmax(0,1fr)_260px] tw-gap-4 max-[1280px]:tw-grid-cols-[320px_minmax(0,1fr)] max-[960px]:tw-grid-cols-1">
           <Card className="tw-flex tw-h-full tw-min-h-0 tw-flex-col tw-overflow-hidden">
             <div className="tw-border-0 tw-border-b tw-border-solid tw-border-vm-slate-100 tw-px-4 tw-py-4">
               <h2 className="tw-m-0 tw-text-[0.95rem] tw-font-extrabold tw-text-vm-slate-900">Danh sách khách hàng</h2>
@@ -338,6 +350,7 @@ export function CustomerListPage() {
                 <CustomerListItem
                   key={customer.code}
                   customer={customer}
+                  onContact={() => openSupportCenterConversation({ participantId: customer.code, participantName: customer.name, participantType: "customer" })}
                   selected={customer.code === selectedCustomer.code}
                   onSelect={() => setSelectedCode(customer.code)}
                 />
@@ -352,39 +365,47 @@ export function CustomerListPage() {
           </Card>
 
           <div className="tw-grid tw-gap-4">
-            <Card className="tw-p-5">
+            <Card className="tw-p-4">
               <h2 className="tw-m-0 tw-text-[0.98rem] tw-font-extrabold tw-text-vm-slate-900">Hồ sơ nhanh</h2>
-              <div className="tw-mt-5 tw-grid tw-grid-cols-[72px_minmax(0,1fr)] tw-gap-5">
-                <EntityAvatar initials={selectedCustomer.initials} size="xl" />
+              <div className="tw-mt-3 tw-grid tw-grid-cols-[56px_minmax(0,1fr)] tw-gap-4">
+                <EntityAvatar initials={selectedCustomer.initials} size="lg" />
                 <div className="tw-min-w-0">
-                  <h3 className="tw-m-0 tw-text-[1.45rem] tw-font-extrabold tw-leading-tight tw-text-vm-slate-900">{selectedCustomer.name}</h3>
-                  <p className="tw-m-0 tw-mt-1 tw-text-[0.86rem] tw-font-semibold tw-text-vm-slate-500">{selectedCustomer.code}</p>
-                  <div className="tw-mt-3 tw-flex tw-flex-wrap tw-gap-2">
-                    <Badge tone="primary" className="tw-rounded-full tw-px-3">VIP</Badge>
-                    <Badge tone={approvalBadgeTone(selectedCustomer.approval)} className="tw-rounded-full tw-px-3">
+                  <h3 className="tw-m-0 tw-text-[1.14rem] tw-font-extrabold tw-leading-tight tw-text-vm-slate-900">{selectedCustomer.name}</h3>
+                  <p className="tw-m-0 tw-mt-0.5 tw-text-[0.78rem] tw-font-semibold tw-text-vm-slate-500">{selectedCustomer.code}</p>
+                  <div className="tw-mt-2 tw-flex tw-flex-wrap tw-gap-1.5">
+                    <Badge tone="primary" className="tw-rounded-full tw-px-2.5 tw-text-[0.66rem]">VIP</Badge>
+                    <Badge tone={approvalBadgeTone(selectedCustomer.approval)} className="tw-rounded-full tw-px-2.5 tw-text-[0.66rem]">
                       {selectedCustomer.approval}
                     </Badge>
-                    <Badge tone="success" className="tw-rounded-full tw-px-3">{selectedCustomer.status}</Badge>
+                    <Badge tone="success" className="tw-rounded-full tw-px-2.5 tw-text-[0.66rem]">{selectedCustomer.status}</Badge>
                   </div>
                 </div>
               </div>
 
-              <div className="tw-mt-5 tw-grid tw-gap-3">
+              <div className="tw-mt-3 tw-grid tw-gap-2">
                 <QuickInfoRow icon="far fa-envelope" label={selectedCustomer.email} />
                 <QuickInfoRow icon="fas fa-phone" label={selectedCustomer.phone} />
                 <QuickInfoRow icon="fas fa-map-marker-alt" label={selectedCustomer.address} />
               </div>
 
-              <div className="tw-mt-5 tw-flex tw-flex-wrap tw-gap-3">
-                <Button variant="secondary">
+              <div className="tw-mt-3 tw-flex tw-flex-wrap tw-gap-2">
+                <Button
+                  size="sm"
+                  variant="primary"
+                  onClick={() => openSupportCenterConversation({ participantId: selectedCustomer.code, participantName: selectedCustomer.name, participantType: "customer" })}
+                >
+                  <i className="far fa-comment-dots" />
+                  Liên hệ
+                </Button>
+                <Button size="sm" variant="secondary">
                   <i className="fas fa-pen" />
                   Cập nhật
                 </Button>
-                <Button variant="secondary">
+                <Button size="sm" variant="secondary">
                   <i className="fas fa-check" />
                   Duyệt
                 </Button>
-                <Button variant="danger">
+                <Button size="sm" variant="danger">
                   <i className="fas fa-pause" />
                   Tạm ngưng
                 </Button>

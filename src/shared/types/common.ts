@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-export type AppLayout = "admin" | "client" | "auth";
+export type AppLayout = "admin" | "client" | "auth" | "fullscreen";
 
 export interface BreadcrumbItem {
   label: string;

@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import { Badge, Button, Card, EntityAvatar, InfoBanner, SelectMenu } from "@/components/ui";
+import { openSupportCenterConversation } from "@/features/support";
 import { cn } from "@/lib/cn";
 
 type EmployeeRole = "EMPLOYEE" | "PARKING_MANAGER" | "SYSTEM_ADMIN";
@@ -195,24 +196,25 @@ function EmployeeMetric({
 
 function EmployeeListItem({
   employee,
+  onContact,
   onSelect,
   selected,
 }: {
   employee: Employee;
+  onContact: () => void;
   onSelect: () => void;
   selected: boolean;
 }) {
   return (
-    <button
-      type="button"
+    <article
       className={cn(
-        "tw-flex tw-w-full tw-min-w-0 tw-items-center tw-gap-2.5 tw-overflow-hidden tw-rounded-vm-md tw-border tw-border-solid tw-bg-white tw-px-2.5 tw-py-2.5 tw-text-left tw-transition",
+        "tw-flex tw-w-full tw-min-w-0 tw-items-center tw-gap-2 tw-overflow-hidden tw-rounded-vm-md tw-border tw-border-solid tw-bg-white tw-p-1.5 tw-transition",
         selected
           ? "tw-border-vm-primary tw-bg-brand-50 tw-shadow-[inset_3px_0_0_#2563EB,0_8px_18px_rgba(37,99,235,0.08)]"
           : "tw-border-transparent hover:tw-border-brand-100 hover:tw-bg-vm-slate-25",
       )}
-      onClick={onSelect}
     >
+      <button type="button" className="tw-flex tw-min-w-0 tw-flex-1 tw-items-center tw-gap-2.5 tw-border-0 tw-bg-transparent tw-px-1 tw-py-1 tw-text-left" onClick={onSelect}>
       <EntityAvatar initials={employee.initials} size="sm" tone={employee.avatarTone} />
       <span className="tw-min-w-0 tw-flex-1">
         <strong className="tw-block tw-truncate tw-text-[0.83rem] tw-font-extrabold tw-text-vm-slate-900">{employee.name}</strong>
@@ -223,7 +225,17 @@ function EmployeeListItem({
       <Badge tone={statusBadgeTone(employee.status)} className="tw-flex-shrink-0 tw-rounded-full tw-px-2 tw-text-[0.62rem]">
         {employee.status}
       </Badge>
-    </button>
+      </button>
+      <button
+        type="button"
+        className="tw-inline-flex tw-h-8 tw-w-8 tw-flex-shrink-0 tw-items-center tw-justify-center tw-rounded-vm-md tw-border tw-border-solid tw-border-brand-100 tw-bg-white tw-text-vm-primary hover:tw-bg-brand-50"
+        onClick={onContact}
+        aria-label={`Liên hệ ${employee.name}`}
+        title="Liên hệ"
+      >
+        <i className="far fa-comment-dots tw-text-[0.9rem]" />
+      </button>
+    </article>
   );
 }
 
@@ -322,6 +334,7 @@ export function EmployeeListPage() {
                 <EmployeeListItem
                   key={employee.code}
                   employee={employee}
+                  onContact={() => openSupportCenterConversation({ participantId: employee.code, participantName: employee.name, participantType: "employee" })}
                   selected={employee.code === selectedEmployee.code}
                   onSelect={() => setSelectedCode(employee.code)}
                 />
@@ -365,6 +378,13 @@ export function EmployeeListPage() {
               </div>
 
               <div className="tw-mt-5 tw-flex tw-flex-wrap tw-gap-3">
+                <Button
+                  variant="primary"
+                  onClick={() => openSupportCenterConversation({ participantId: selectedEmployee.code, participantName: selectedEmployee.name, participantType: "employee" })}
+                >
+                  <i className="far fa-comment-dots" />
+                  Liên hệ
+                </Button>
                 <Button variant="secondary">
                   <i className="fas fa-pen" />
                   Cập nhật

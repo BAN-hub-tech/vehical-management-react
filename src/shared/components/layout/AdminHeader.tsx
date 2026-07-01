@@ -7,8 +7,9 @@ const searchSuggestions = ["Tìm thẻ xe", "Tra cứu khách hàng", "Kiểm tr
 
 const notifications = [
   {
-    href: "/admin/customer",
+    href: "/admin/support-center",
     icon: "fas fa-envelope",
+    targetBlank: true,
     title: "Tin nhắn mới",
     meta: "4 cuộc trò chuyện cần phản hồi",
   },
@@ -180,7 +181,14 @@ export function AdminHeader() {
               <div className={cn(panelClassName, "tw-w-[320px]")}>
                 <div className="tw-px-3 tw-py-2 tw-text-[0.78rem] tw-font-extrabold tw-uppercase tw-tracking-[0.04em] tw-text-vm-slate-500">Thông báo</div>
                 {notifications.map((item) => (
-                  <Link key={item.title} to={item.href} className={itemClassName} onClick={() => setNotificationsOpen(false)}>
+                  <Link
+                    key={item.title}
+                    to={item.href}
+                    className={itemClassName}
+                    target={item.targetBlank ? "_blank" : undefined}
+                    rel={item.targetBlank ? "noreferrer" : undefined}
+                    onClick={() => setNotificationsOpen(false)}
+                  >
                     <HeaderItemIcon icon={item.icon} />
                     <HeaderItemCopy title={item.title} meta={item.meta} />
                   </Link>

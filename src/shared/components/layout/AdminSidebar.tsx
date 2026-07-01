@@ -25,7 +25,13 @@ function SidebarIcon({ icon }: { icon: AdminSidebarIcon }) {
 }
 
 function Chevron({ expanded }: { expanded: boolean }) {
-  return <i className={cn("fas fa-chevron-down tw-text-[0.78rem] tw-transition-transform tw-duration-200", expanded ? "tw-rotate-0" : "-tw-rotate-90")} aria-hidden="true" />;
+  return (
+    <i
+      className="fas fa-chevron-down tw-text-[0.78rem] tw-transition-transform tw-duration-200"
+      style={{ transform: expanded ? "rotate(0deg)" : "rotate(-90deg)" }}
+      aria-hidden="true"
+    />
+  );
 }
 
 function isLeafActive(item: AdminSidebarLeaf, pathname: string) {

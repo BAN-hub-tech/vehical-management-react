@@ -8,6 +8,7 @@ import { CustomerListPage } from "@/features/customers";
 import { EmployeeListPage, ShiftSchedulePage } from "@/features/employees";
 import { AccountListPage, InternalProfilePage, RoleListPage } from "@/features/iam";
 import { ParkingOperationsPage } from "@/features/parking";
+import { OperationsSupportCenterPage } from "@/features/support";
 
 export interface RouteDefinition {
   path: string;
@@ -50,6 +51,7 @@ export const routes: RouteDefinition[] = [
   { path: "/admin/customer/form", title: "Thong tin khach hang", layout: "admin", element: blankPage },
   { path: "/admin/role", title: "Phan quyen vai tro", layout: "admin", element: <RoleListPage /> },
   { path: "/admin/role/form", title: "Thong tin vai tro", layout: "admin", element: blankPage },
+  { path: "/admin/support-center", title: "Trung tam ho tro van hanh", layout: "fullscreen", element: <OperationsSupportCenterPage /> },
   { path: "/pricing", title: "Bang gia dich vu do xe", layout: "client", element: blankPage },
   { path: "/customerTicket/customer-infor", title: "Thong tin khach hang", layout: "client", element: blankPage },
   { path: "/customerTicket/customer-infor-detail", title: "Thong tin tai khoan", layout: "client", element: blankPage },
